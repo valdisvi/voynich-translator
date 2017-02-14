@@ -20,53 +20,59 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="Creating GitHub repository." note="" work="28800" start="20170213T000000Z" end="20170213T120000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-    <task id="2" name="Create Java Application." note="" work="57600" start="20170213T000000Z" end="20170213T170000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-    <task id="3" name="Creating the rules for translitting with phonetics." note="" work="86400" start="20170213T000000Z" end="20170213T170000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-    <task id="4" name="Translitting logic research" note="" work="86400" start="20170213T170000Z" end="20170214T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="Creating GitHub repository." note="" work="28800" start="20170214T000000Z" end="20170214T120000Z" work-start="20170214T080000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="must-start-on" time="20170214T000000Z"/>
+    </task>
+    <task id="2" name="Create Java Application." note="" work="57600" start="20170214T000000Z" end="20170214T170000Z" work-start="20170214T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20170214T000000Z"/>
+    </task>
+    <task id="3" name="Creating the rules for translitting with phonetics." note="" work="86400" start="20170214T000000Z" end="20170214T170000Z" work-start="20170214T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20170214T000000Z"/>
+    </task>
+    <task id="4" name="Translitting logic research" note="" work="86400" start="20170214T170000Z" end="20170215T170000Z" work-start="20170215T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="3" type="FS"/>
       </predecessors>
     </task>
-    <task id="5" name="Translitting implementation" note="" work="86400" start="20170214T170000Z" end="20170215T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+    <task id="5" name="Translitting implementation" note="" work="86400" start="20170215T170000Z" end="20170216T170000Z" work-start="20170216T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="4" type="FS"/>
       </predecessors>
     </task>
-    <task id="6" name="Creating a Mapping for Currier translitter." note="" work="28800" start="20170213T170000Z" end="20170214T120000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+    <task id="6" name="Creating a Mapping for Currier translitter." note="" work="28800" start="20170214T170000Z" end="20170215T120000Z" work-start="20170215T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="2" type="FS"/>
       </predecessors>
     </task>
-    <task id="7" name="Creating a functionality for translit reading from web." note="" work="129600" start="20170214T120000Z" end="20170215T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+    <task id="7" name="Creating a functionality for translit reading from web." note="" work="129600" start="20170215T120000Z" end="20170216T170000Z" work-start="20170215T120000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="6" type="FS"/>
       </predecessors>
     </task>
-    <task id="8" name="Creating front-end table for displaying the Mapping." note="" work="28800" start="20170216T000000Z" end="20170216T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
-      <constraint type="start-no-earlier-than" time="20170216T000000Z"/>
+    <task id="8" name="Creating front-end table for displaying the Mapping." note="" work="28800" start="20170217T000000Z" end="20170217T170000Z" work-start="20170217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20170217T000000Z"/>
     </task>
-    <task id="9" name="Implementing regex for txt from web." note="" work="28800" start="20170216T000000Z" end="20170216T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
-      <constraint type="start-no-earlier-than" time="20170216T000000Z"/>
+    <task id="9" name="Implementing regex for txt from web." note="" work="28800" start="20170217T000000Z" end="20170217T170000Z" work-start="20170217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20170217T000000Z"/>
     </task>
-    <task id="10" name="Java Application - add web-start." note="" work="28800" start="20170216T000000Z" end="20170216T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
-      <constraint type="start-no-earlier-than" time="20170216T000000Z"/>
+    <task id="10" name="Java Application - add web-start." note="" work="28800" start="20170217T000000Z" end="20170217T170000Z" work-start="20170217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20170217T000000Z"/>
     </task>
-    <task id="11" name="Implement user input for translitting." note="" work="28800" start="20170216T000000Z" end="20170216T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
-      <constraint type="start-no-earlier-than" time="20170216T000000Z"/>
+    <task id="11" name="Implement user input for translitting." note="" work="28800" start="20170217T000000Z" end="20170217T170000Z" work-start="20170217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20170217T000000Z"/>
     </task>
-    <task id="12" name="Implement an option for adding user-made translitter. " note="" work="28800" start="20170216T000000Z" end="20170216T170000Z" percent-complete="0" type="normal" scheduling="fixed-work">
-      <constraint type="start-no-earlier-than" time="20170216T000000Z"/>
+    <task id="12" name="Implement an option for adding user-made translitter. " note="" work="28800" start="20170217T000000Z" end="20170217T170000Z" work-start="20170217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20170217T000000Z"/>
     </task>
   </tasks>
   <resource-groups/>
   <resources>
-    <resource id="1" name="Inta Kova&#x13C;enko" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="2" name="Linda Pav&#x101;re" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="3" name="Konstant&#x12B;ns Andronovs" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="4" name="Everita Macko" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="5" name="Madars Jaunar&#x101;js" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="6" name="Art&#x16B;rs Amirovs" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource id="1" name="Inta Kova&#x13C;enko" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource id="2" name="Linda Pav&#x101;re" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource id="3" name="Konstant&#x12B;ns Andronovs" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource id="4" name="Everita Macko" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource id="5" name="Madars Jaunar&#x101;js" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource id="6" name="Art&#x16B;rs Amirovs" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
   </resources>
   <allocations>
     <allocation task-id="5" resource-id="1" units="100"/>
