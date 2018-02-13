@@ -1,0 +1,6 @@
+Voynich.jar does not have the same source code as the one that has been commited. 
+The commited source code can not be built into a working application. 
+Compilation of the source code returns numerous errors in the console.
+Voynich.jar can only be executed from terminal. The execution creates a VoynichData folder.
+After the Voynich.jar file has been executed once,
+in next execusions transliterations tables do not apper if the VoynichData folder is not deleted after every launch. 
