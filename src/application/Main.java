@@ -14,15 +14,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("application.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/application/application.fxml"));
 		Font.loadFont( Main.class.getResource("voynich.ttf").toExternalForm(), 10 );
 
 		primaryStage.setMinWidth(680);        
 	    primaryStage.setMinHeight(420);
 	    
 	    primaryStage.getIcons().add(new Image("pic/Logo.png"));
-        primaryStage.setTitle("Voynich Transliterator");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setTitle("Voynich Transliterator");
         primaryStage.show();
 
 	}

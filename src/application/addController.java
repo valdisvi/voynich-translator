@@ -36,25 +36,30 @@ public class addController {
 	@FXML
 	ComboBox selectExistingTable;
 	
-	ObservableList<Transliteration> transliterationRulesObsList = FXCollections.observableArrayList();
+	ObservableList transliterationRulesObsList = FXCollections.observableArrayList();
 	
 	public void initialize() throws IOException {
-		File[] allProperties = finder("../VoynichData");
-		for (File properties : allProperties) {
-			String path = properties.getPath();
-			String name = properties.getName();
-			PropertyManager pManager = new PropertyManager(name, path);
-			Transliteration rules = pManager.getRules();
-			transliterationRulesObsList.add(rules);
-		}
-		// Sets transliterating rule list for combobox
-		selectExistingTable.setItems(transliterationRulesObsList);
-	}
+        File[] allProperties;
+        File[] arrfile = allProperties = this.finder("VoynichData");
+        int n = arrfile.length;
+        int n2 = 0;
+        while (n2 < n) {
+            File properties = arrfile[n2];
+            String path = properties.getPath();
+            String name = properties.getName();
+            PropertyManager pManager = new PropertyManager(name, path);
+            Transliteration rules = pManager.getRules();
+            this.transliterationRulesObsList.add((Object)rules);
+            ++n2;
+        }
+        this.selectExistingTable.setItems(this.transliterationRulesObsList);
+    }
 
 	public File[] finder(String dirName) {
 		File dir = new File(dirName);
 
 		return dir.listFiles(new FilenameFilter() {
+			@Override
 			public boolean accept(File dir, String filename) {
 				return filename.endsWith(".properties");
 			}
@@ -62,7 +67,7 @@ public class addController {
 	}
 	
 	public void selectTable() throws FileNotFoundException, IOException{
-		try(BufferedReader br = new BufferedReader(new FileReader("../VoynichData/"+selectExistingTable.getValue()))) {
+		/*try(BufferedReader br = new BufferedReader(new FileReader("../VoynichData/"+this.selectExistingTable.getValue()))) {
 		    StringBuilder sb = new StringBuilder();
 		    String line = br.readLine();
 		    
@@ -71,8 +76,38 @@ public class addController {
 		        sb.append(System.lineSeparator());
 		        line = br.readLine();
 		    }
-		    addTableTextArea.setText(sb.toString());
-		}
+		    this.addTableTextArea.setText(sb.toString());
+		}*/
+		
+		
+		  Throwable throwable = null;
+	        Object var2_3 = null;
+	        try {
+	            BufferedReader br = new BufferedReader(new FileReader("VoynichData/" + this.selectExistingTable.getValue()));
+	            try {
+	                StringBuilder sb = new StringBuilder();
+	                String line = br.readLine();
+	                while (line != null) {
+	                    sb.append(line);
+	                    sb.append(System.lineSeparator());
+	                    line = br.readLine();
+	                }
+	                this.addTableTextArea.setText(sb.toString());
+	            }
+	            finally {
+	                if (br != null) {
+	                    br.close();
+	                }
+	            }
+	        }
+	        catch (Throwable throwable2) {
+	            if (throwable == null) {
+	                throwable = throwable2;
+	            } else if (throwable != throwable2) {
+	                throwable.addSuppressed(throwable2);
+	            }
+	           
+	        }
 	}
 	
 	public void selectAction() throws IOException{
@@ -123,7 +158,7 @@ public class addController {
 	
 	public void writeToFile(){
 		
-	    File file = new File("../VoynichData/"+addTableNameTextField.getText()+".properties");
+	    File file = new File("VoynichData/"+this.addTableNameTextField.getText()+".properties");
 	    FileWriter writer;
 	    try {
 	        writer = new FileWriter(file, false);

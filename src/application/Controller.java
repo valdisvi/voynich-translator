@@ -19,9 +19,12 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -98,7 +101,7 @@ public class Controller {
 	public static String path2 = "";
 	public static String webPath2 = "";
 
-	public void initialize() {
+	public void initialize() throws IOException {
 
 		// WebController initialize
 		pageNumber.setText(page);
@@ -112,14 +115,102 @@ public class Controller {
 		comboBoxSelect.setPromptText("Choose resource");
 		labelSource.setText("Source: " + "none");
 
+		//FIXIT
 		//ComboBox and Transliteration initialization
-		try {
+		/*
+	try {
 			setTransliterationComboBox();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		setTransliterationTable();
+		}  
+		//setTransliterationTable(); */
+		
+		File[] allProperties = this.finder("../VoynichData");
+		
+		InputStream Currier = this.getClass().getResourceAsStream("/data/Currier.properties");
+        InputStream FSG = this.getClass().getResourceAsStream("/data/FSG.properties");
+        InputStream Bennett_to_FSG = this.getClass().getResourceAsStream("/data/Bennett_to_FSG.properties");
+        InputStream Bennett = this.getClass().getResourceAsStream("/data/Bennett.properties");
+        InputStream BasicEVA_to_ASCIIsounds = this.getClass().getResourceAsStream("/data/BasicEVA_to_ASCIIsounds.properties");
+        if (allProperties == null) {
+            new File("VoynichData").mkdirs();
+            BufferedReader Currierbr = new BufferedReader(new InputStreamReader(Currier));
+            StringBuilder sb = new StringBuilder();
+            String line = Currierbr.readLine();
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = Currierbr.readLine();
+            }
+            File file = new File("VoynichData/Currier.properties");
+            FileWriter writer = new FileWriter(file, false);
+            PrintWriter printer = new PrintWriter(writer);
+            printer.append(sb.toString());
+            printer.close();
+            this.setTransliterationComboBox();
+            this.setTransliterationTable();
+            BufferedReader FSGbr = new BufferedReader(new InputStreamReader(FSG));
+            StringBuilder sb2 = new StringBuilder();
+            String line2 = FSGbr.readLine();
+            while (line2 != null) {
+                sb2.append(line2);
+                sb2.append(System.lineSeparator());
+                line2 = FSGbr.readLine();
+            }
+            File file2 = new File("VoynichData/FSG.properties");
+            FileWriter writer2 = new FileWriter(file2, false);
+            PrintWriter printer2 = new PrintWriter(writer2);
+            printer2.append(sb2.toString());
+            printer2.close();
+            this.setTransliterationComboBox();
+            this.setTransliterationTable();
+            BufferedReader Bennett_to_FSGbr = new BufferedReader(new InputStreamReader(Bennett_to_FSG));
+            StringBuilder sb3 = new StringBuilder();
+            String line3 = Bennett_to_FSGbr.readLine();
+            while (line3 != null) {
+                sb3.append(line3);
+                sb3.append(System.lineSeparator());
+                line3 = Bennett_to_FSGbr.readLine();
+            }
+            File file3 = new File("VoynichData/Bennett_to_FSG.properties");
+            FileWriter writer3 = new FileWriter(file3, false);
+            PrintWriter printer3 = new PrintWriter(writer3);
+            printer3.append(sb3.toString());
+            printer3.close();
+           this.setTransliterationComboBox();
+            this.setTransliterationTable();
+            BufferedReader Bennettbr = new BufferedReader(new InputStreamReader(Bennett));
+            StringBuilder sb4 = new StringBuilder();
+            String line4 = Bennettbr.readLine();
+            while (line4 != null) {
+                sb4.append(line4);
+                sb4.append(System.lineSeparator());
+                line4 = Bennettbr.readLine();
+            }
+            File file4 = new File("VoynichData/Bennett.properties");
+            FileWriter writer4 = new FileWriter(file4, false);
+            PrintWriter printer4 = new PrintWriter(writer4);
+            printer4.append(sb4.toString());
+            printer4.close();
+           this.setTransliterationComboBox();
+            this.setTransliterationTable();
+            BufferedReader BasicEVA_to_ASCIIsoundsbr = new BufferedReader(new InputStreamReader(BasicEVA_to_ASCIIsounds));
+            StringBuilder sb5 = new StringBuilder();
+            String line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
+            while (line5 != null) {
+                sb5.append(line5);
+                sb5.append(System.lineSeparator());
+                line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
+            }
+            File file5 = new File("VoynichData/BasicEVA_to_ASCIIsounds.properties");
+            FileWriter writer5 = new FileWriter(file5, false);
+            PrintWriter printer5 = new PrintWriter(writer5);
+            printer5.append(sb5.toString());
+            printer5.close();
+           this.setTransliterationComboBox();
+            this.setTransliterationTable();
+        }
 
 	}
 
@@ -236,38 +327,39 @@ public class Controller {
 		}
 	}
 
-	public void setTransliterationComboBox() throws IOException {
+	 public void setTransliterationComboBox() throws IOException {
+	        File[] allProperties = this.finder("VoynichData");
+	        ObservableList transliterationRulesObsList = FXCollections.observableArrayList();
+	        File[] arrfile = allProperties;
+	        int n = arrfile.length;
+	        int n2 = 0;
+	        while (n2 < n) {
+	            File properties = arrfile[n2];
+	            String path = properties.getPath();
+	            String name = properties.getName();
+	            PropertyManager pManager = new PropertyManager(name, path);
+	            Transliteration rules = pManager.getRules();
+	            transliterationRulesObsList.add((Object)rules);
+	            ++n2;
+	        }
+	        this.comboBoxSource.setItems(transliterationRulesObsList);
+	        this.comboBoxSource.setValue(transliterationRulesObsList.get(0));
+	    }
 
-		File[] allProperties = finder("../VoynichData");
-		ObservableList<Transliteration> transliterationRulesObsList = FXCollections.observableArrayList();
-		for (File properties : allProperties) {
-			String path = properties.getPath();
-			String name = properties.getName();
-			PropertyManager pManager = new PropertyManager(name, path);
-			Transliteration rules = pManager.getRules();
-			transliterationRulesObsList.add(rules);
-		}
-		// Sets transliterating rule list for combobox
-		comboBoxSource.setItems(transliterationRulesObsList);
-		comboBoxSource.setValue(transliterationRulesObsList.get(0));
-	}
 
 	public void setTransliterationTable() {
-
-		// Populates relativity table
-		tableColumnFrom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey()));
-		tableColumnTo.setCellValueFactory(
-				cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValue())));
-
-		Transliteration chosenTransliteration = (Transliteration) comboBoxSource.getValue();
-		LinkedHashMap<String, String> transliterationRules = chosenTransliteration.getList();
-		tableTranslitRules.getItems().clear();
-		tableTranslitRules.getItems().addAll(transliterationRules.entrySet());
-		tableColumnFrom.setText("From");
-		tableColumnTo.setText("To");
+		
+		this.tableColumnFrom.setCellValueFactory(cellData -> new SimpleStringProperty((String)((Map.Entry)cellData.getValue()).getKey()));
+        this.tableColumnTo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(((Map.Entry)cellData.getValue()).getValue())));
+        Transliteration chosenTransliteration = (Transliteration)this.comboBoxSource.getValue();
+        LinkedHashMap<String, String> transliterationRules = chosenTransliteration.getList();
+        this.tableTranslitRules.getItems().clear();
+        this.tableTranslitRules.getItems().addAll(transliterationRules.entrySet());
+        this.tableColumnFrom.setText("From");
+        this.tableColumnTo.setText("To"); 
 
 		// TODO check if Voynich font needed
-		//tableColumnFrom.setStyle("-fx-font-family: \"Voynich\"");
+		//tableColumnFrom.setStyle("-fx-font-family: \"Voynich\""); 
 	}
 	
 	public void refreshTransliterationComboBox() throws IOException {
@@ -348,7 +440,7 @@ public class Controller {
 	public void deleteButtonAction(){
 		//deletes selected table
 		try{
-			File file = new File("../VoynichData/"+comboBoxSource.getValue());
+			File file = new File("VoynichData/"+comboBoxSource.getValue());
     		if(comboBoxSource.getValue().toString().equals("Currier.properties") 
 					|| comboBoxSource.getValue().toString().equals("BasicEVA_to_ASCIIsounds.properties") 
 					|| comboBoxSource.getValue().toString().equals("Bennett_to_FSG.properties")
@@ -384,19 +476,19 @@ public class Controller {
 	
 	public void refreshOnDelete() throws IOException {
 		setTransliterationComboBox();
-		ObservableList<Transliteration> items = comboBoxSource.getItems();
+		ObservableList items = comboBoxSource.getItems();
 		comboBoxSource.setValue(items.get(0));
 
 	}
 	
 	public void transliterate() throws IOException, InterruptedException {
-		String path = "../VoynichData/"+comboBoxSource.getValue();
+		String path = "VoynichData/"+comboBoxSource.getValue();
 		TransliterationProcess tp = new TransliterationProcess(path, "Currier");
 		outputText.setText(tp.transliterate(inputText.getText()));
 	}
 	
 	public void webTransliterate() throws IOException, InterruptedException{
-		String path = "../VoynichData/"+comboBoxSource.getValue();
+		String path = "VoynichData/"+comboBoxSource.getValue();
 		TransliterationProcess tp = new TransliterationProcess(path, "Currier");
 		webOutputText.setText(tp.transliterate(webInputText.getText()));
 	}
