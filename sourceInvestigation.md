@@ -1,4 +1,4 @@
-# Inherited code initial issues
+## Inherited code initial issues
 - Voynich.jar does not have the same source code as the one that has been commited. 
 - The commited source code can not be built into a working application. 
 - Compilation of the source code returns numerous errors in the console.

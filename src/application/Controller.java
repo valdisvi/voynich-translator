@@ -121,7 +121,6 @@ public class Controller {
 	try {
 			setTransliterationComboBox();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}  
 		//setTransliterationTable(); */
@@ -179,7 +178,7 @@ public class Controller {
             printer3.append(sb3.toString());
             printer3.close();
            this.setTransliterationComboBox();
-            this.setTransliterationTable();
+           this.setTransliterationTable();
             BufferedReader Bennettbr = new BufferedReader(new InputStreamReader(Bennett));
             StringBuilder sb4 = new StringBuilder();
             String line4 = Bennettbr.readLine();
@@ -194,7 +193,7 @@ public class Controller {
             printer4.append(sb4.toString());
             printer4.close();
            this.setTransliterationComboBox();
-            this.setTransliterationTable();
+           this.setTransliterationTable();
             BufferedReader BasicEVA_to_ASCIIsoundsbr = new BufferedReader(new InputStreamReader(BasicEVA_to_ASCIIsounds));
             StringBuilder sb5 = new StringBuilder();
             String line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
@@ -209,7 +208,7 @@ public class Controller {
             printer5.append(sb5.toString());
             printer5.close();
            this.setTransliterationComboBox();
-            this.setTransliterationTable();
+           this.setTransliterationTable();
         }
 
 	}
@@ -358,7 +357,7 @@ public class Controller {
         this.tableColumnFrom.setText("From");
         this.tableColumnTo.setText("To"); 
 
-		// TODO check if Voynich font needed
+		// check if Voynich font needed
 		//tableColumnFrom.setStyle("-fx-font-family: \"Voynich\""); 
 	}
 	
@@ -446,6 +445,7 @@ public class Controller {
 					|| comboBoxSource.getValue().toString().equals("Bennett_to_FSG.properties")
 					|| comboBoxSource.getValue().toString().equals("Bennett.properties")
 					|| comboBoxSource.getValue().toString().equals("FSG.properties")){
+    			
     			Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");
 				alert.setHeaderText("Cannot delete default table");
