@@ -11,19 +11,25 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.swing.*;
-
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 
 public class TestController {
+	
+	
+	
 
 	public void dataCreate() throws IOException {
+		//VoynichData - folder containing .properties files with transliteration tables
 		File[] allProperties = this.finder("VoynichData");
 		InputStream Currier = this.getClass().getResourceAsStream("/data/Currier.properties");
 		InputStream FSG = this.getClass().getResourceAsStream("/data/FSG.properties");
@@ -48,8 +54,6 @@ public class TestController {
 			PrintWriter printer = new PrintWriter(writer);
 			printer.append(sb.toString());
 			printer.close();
-			// this.setTransliterationComboBox();
-			// this.setTransliterationTable();
 			BufferedReader FSGbr = new BufferedReader(new InputStreamReader(FSG));
 			StringBuilder sb2 = new StringBuilder();
 			String line2 = FSGbr.readLine();
@@ -63,8 +67,6 @@ public class TestController {
 			PrintWriter printer2 = new PrintWriter(writer2);
 			printer2.append(sb2.toString());
 			printer2.close();
-			// this.setTransliterationComboBox();
-			// this.setTransliterationTable();
 			BufferedReader Bennett_to_FSGbr = new BufferedReader(new InputStreamReader(Bennett_to_FSG));
 			StringBuilder sb3 = new StringBuilder();
 			String line3 = Bennett_to_FSGbr.readLine();
@@ -78,8 +80,6 @@ public class TestController {
 			PrintWriter printer3 = new PrintWriter(writer3);
 			printer3.append(sb3.toString());
 			printer3.close();
-			// this.setTransliterationComboBox();
-			// this.setTransliterationTable();
 			BufferedReader Bennettbr = new BufferedReader(new InputStreamReader(Bennett));
 			StringBuilder sb4 = new StringBuilder();
 			String line4 = Bennettbr.readLine();
@@ -93,8 +93,6 @@ public class TestController {
 			PrintWriter printer4 = new PrintWriter(writer4);
 			printer4.append(sb4.toString());
 			printer4.close();
-			// this.setTransliterationComboBox();
-			// this.setTransliterationTable();
 			BufferedReader BasicEVA_to_ASCIIsoundsbr = new BufferedReader(
 					new InputStreamReader(BasicEVA_to_ASCIIsounds));
 			StringBuilder sb5 = new StringBuilder();
@@ -109,8 +107,6 @@ public class TestController {
 			PrintWriter printer5 = new PrintWriter(writer5);
 			printer5.append(sb5.toString());
 			printer5.close();
-			// this.setTransliterationComboBox();
-			// this.setTransliterationTable();
 		}
 	}
 
@@ -124,7 +120,7 @@ public class TestController {
 		});
 	}
 
-	// needs a refresh panel/signal/function to update contents of comboBox.
+	
 	public void deleteTable(String name) {
 		try {
 			File file = new File("VoynichData/" + name);
@@ -138,7 +134,7 @@ public class TestController {
 				if (check == JOptionPane.YES_OPTION) {
 					try {
 						file.delete();
-						// TODO check for successful/ unsuccessful file removal
+						//  check for successful/ unsuccessful file removal
 						JOptionPane.showMessageDialog(null, "Table succesfully removed", "Success!",
 								JOptionPane.INFORMATION_MESSAGE);
 					} catch (Exception e) {
@@ -170,7 +166,7 @@ public class TestController {
 			box.addItem(rules);
 			++n2;
 		}
-
+		TestApp.a = box.getItemAt(0);
 	}
 
 	protected void getResult(JTextArea t, JTextPane text, String author) {
@@ -249,18 +245,5 @@ public class TestController {
 			// tableColumnFrom.setStyle("-fx-font-family: \"System\"");
 			// tableColumnFrom.setCellFactory(getCustomCellFactory("System"));
 		}
-	}
-
-	public void setRulesTable(JTable rules) {
-		//need to somehow separate two...ah. 
-		/*this.tableColumnFrom.setCellValueFactory(cellData -> new SimpleStringProperty((String)((Map.Entry)cellData.getValue()).getKey()));
-        this.tableColumnTo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(((Map.Entry)cellData.getValue()).getValue())));
-        Transliteration chosenTransliteration = (Transliteration)this.comboBoxSource.getValue();
-        LinkedHashMap<String, String> transliterationRules = chosenTransliteration.getList();
-        this.tableTranslitRules.getItems().clear();
-        this.tableTranslitRules.getItems().addAll(transliterationRules.entrySet());
-        this.tableColumnFrom.setText("From");
-        this.tableColumnTo.setText("To"); */
-	}
-	
+	}	
 }

@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.FontFormatException;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
@@ -21,20 +23,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class TestApp {
 
 	private JFrame mainFrame;
-	private JTable tableTrans;
 	private TestController t;
 	JComboBox comboBox;
 	String author;
-
+	private JTable tableTrans;
+	public static Object a ;
 	/**
 	 * Launch the application.
 	 */
@@ -130,7 +136,7 @@ public class TestApp {
 		JLabel lblTable = new JLabel("Transliteration tables");
 		lblTable.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JButton btnAdd = new JButton("+");
+		JButton btnAdd = new JButton("Add");
 		btnAdd.setToolTipText("Add new table");
 		btnAdd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -145,7 +151,7 @@ public class TestApp {
 		// loads comboBox values
 		t.setBoxContents(comboBox);
 
-		JButton btnDelete = new JButton("-");
+		JButton btnDelete = new JButton("Delete");
 		btnDelete.setToolTipText("Delete selected table");
 		btnDelete.addMouseListener(new MouseAdapter() {
 			@Override
@@ -164,7 +170,13 @@ public class TestApp {
 			}
 		});
 		JTextPane txtpnEnterTextHere = new JTextPane();
-		txtpnEnterTextHere.setText("Enter text here...");
+		txtpnEnterTextHere.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				txtpnEnterTextHere.setText("");
+			}
+		});
+		txtpnEnterTextHere.setText("Enter your text here...");
 		// transliteration table testing
 		String[] columnNames = { "From", "To" };
 		Object nnn = comboBox.getSelectedItem();
@@ -175,41 +187,46 @@ public class TestApp {
 
 			}
 		}
-		// System.out.println(nnn);
-		tableTrans = new JTable();
-
-		// panel for table
-		GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
-		gl_tablePanel.setHorizontalGroup(gl_tablePanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_tablePanel.createSequentialGroup().addContainerGap()
-						.addComponent(comboBox, 0, 205, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnDelete).addContainerGap())
-				.addGroup(gl_tablePanel.createSequentialGroup().addGap(12)
-						.addComponent(tableTrans, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-						.addContainerGap(12, Short.MAX_VALUE))
-				.addGroup(gl_tablePanel.createSequentialGroup().addContainerGap(93, Short.MAX_VALUE)
-						.addComponent(lblTable).addGap(81)));
-		gl_tablePanel.setVerticalGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tablePanel.createSequentialGroup().addGap(6).addComponent(lblTable).addGap(11)
-						.addGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_tablePanel.createSequentialGroup().addGap(5)
-										.addGroup(gl_tablePanel.createParallelGroup(Alignment.BASELINE)
-												.addComponent(btnDelete).addComponent(btnAdd)))
-								.addGroup(gl_tablePanel.createSequentialGroup().addGap(6).addComponent(comboBox,
-										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(tableTrans, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_tablePanel.linkSize(SwingConstants.HORIZONTAL, new Component[] { btnDelete, btnAdd });
-		tablePanel.setLayout(gl_tablePanel);
-
+		
+		TestTableModel aaaa = new TestTableModel();
+		tableTrans = new JTable(aaaa);
+		//tableTrans = new JTable();
+		tableTrans.setFillsViewportHeight(true);
+		
+		
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				//checks for change in selected item that is not caused by reloading
+				//refreshes table according to selection
+				if (comboBox.getItemCount() != 0){
+				a = comboBox.getSelectedItem();
+				TestTableModel bbbb = new TestTableModel();
+				tableTrans.setModel(bbbb);
+				}
+			}
+		});
+		
+		JButton refresh = new JButton("Refresh");
+		refresh.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					t.setBoxContents(comboBox);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		refresh.setToolTipText("Refresh tables after adding");
+		
 		JPanel textPane1 = new JPanel();
 		tabbedPane.addTab("Transliterate", null, textPane1, null);
 
 		JButton btnVoynich = new JButton("Voynich");
 		btnVoynich.addMouseListener(new MouseAdapter() {
 			@Override
+			// on click calls font change method
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					t.setFont(btnVoynich, txtpnEnterTextHere);
@@ -221,9 +238,6 @@ public class TestApp {
 				
 			}
 		});
-
-
-
 		JButton btnTrans = new JButton("Transliterate");
 		btnTrans.addMouseListener(new MouseAdapter() {
 			@Override
@@ -288,10 +302,9 @@ public class TestApp {
 					txtpnText.setText("");
 					t.transliterate(comboBox, textPaneW, txtpnText);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
+
 					e1.printStackTrace();
 				}
 
@@ -299,6 +312,7 @@ public class TestApp {
 		});
 
 		JComboBox comboBoxW = new JComboBox();
+		//loads resources into box
 		comboBoxW.addItem("H");
 		comboBoxW.addItem("C");
 		comboBoxW.addItem("F");
@@ -344,9 +358,6 @@ public class TestApp {
 				textPaneW.setText(null);
 				txtpnText.setText(null);
 				textW.setText("1");
-
-				// JFrame delete = new TestDeleteFrame(b);
-
 			}
 		});
 
@@ -363,7 +374,6 @@ public class TestApp {
 		});
 
 		JLabel lblPageNr = new JLabel("Page nr.:");
-		
 		
 		GroupLayout gl_webPanel = new GroupLayout(webPanel);
 		gl_webPanel.setHorizontalGroup(
@@ -414,9 +424,53 @@ public class TestApp {
 					.addGap(10))
 		);
 		
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		// panel for table
+		GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
+		gl_tablePanel.setHorizontalGroup(
+			gl_tablePanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_tablePanel.createSequentialGroup()
+					.addGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_tablePanel.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_tablePanel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(comboBox, Alignment.LEADING, 0, 249, Short.MAX_VALUE)
+								.addGroup(gl_tablePanel.createSequentialGroup()
+									.addComponent(btnAdd)
+									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+									.addComponent(btnDelete)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(refresh)))
+							.addGap(6))
+						.addGroup(gl_tablePanel.createSequentialGroup()
+							.addGap(51)
+							.addComponent(lblTable))
+						.addGroup(gl_tablePanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_tablePanel.setVerticalGroup(
+			gl_tablePanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_tablePanel.createSequentialGroup()
+					.addGap(10)
+					.addComponent(lblTable)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_tablePanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnAdd)
+						.addComponent(refresh)
+						.addComponent(btnDelete))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		scrollPane_3.setViewportView(tableTrans);
+		tablePanel.setLayout(gl_tablePanel);
 		webPanel.setLayout(gl_webPanel);
 
 		mainFrame.getContentPane().setLayout(groupLayout);
-
 	}
 }
