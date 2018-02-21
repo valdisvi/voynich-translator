@@ -87,27 +87,46 @@ public class TestApp {
 		JPanel tablePanel = new JPanel();
 
 		JPanel translatedPanel = new JPanel();
+		
+		JButton btnHelp = new JButton("Help");
+		btnHelp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					JFrame helpFrame= new TestHelpFrame();
+					} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(mainFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE))
-					.addGap(26))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 637, Short.MAX_VALUE))
+							.addGap(26))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(btnHelp)
+							.addContainerGap())))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+					.addComponent(btnHelp)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+							.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
 						.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
