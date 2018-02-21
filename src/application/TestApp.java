@@ -93,7 +93,8 @@ public class TestApp {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
-					JFrame helpFrame= new TestHelpFrame();
+					@SuppressWarnings("unused")
+					JFrame helpFrame = new TestHelpFrame();
 					} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -103,31 +104,30 @@ public class TestApp {
 		GroupLayout groupLayout = new GroupLayout(mainFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 637, Short.MAX_VALUE))
-							.addGap(26))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(btnHelp)
-							.addContainerGap())))
+					.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnHelp)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 637, Short.MAX_VALUE)))
+					.addGap(26))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(btnHelp)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, 554, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnHelp)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
-						.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addComponent(translatedPanel, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		
@@ -161,6 +161,7 @@ public class TestApp {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// calls for creation of another frame
+				@SuppressWarnings("unused")
 				JFrame addFrame = new TestAddFrame();
 			}
 		});
@@ -189,27 +190,17 @@ public class TestApp {
 			}
 		});
 		JTextPane txtpnEnterTextHere = new JTextPane();
+		txtpnEnterTextHere.setText("Enter your text here...");
 		txtpnEnterTextHere.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				txtpnEnterTextHere.setText("");
+				if (txtpnEnterTextHere.getText().equals("Enter your text here...")) {
+				txtpnEnterTextHere.setText("");}
 			}
 		});
-		txtpnEnterTextHere.setText("Enter your text here...");
-		// transliteration table testing
-		String[] columnNames = { "From", "To" };
-		Object nnn = comboBox.getSelectedItem();
-		File[] allProperties = t.finder("VoynichData");
-		for (File f : allProperties) {
-			if (nnn.toString().equals(f.getName())) {
-				PropertyManager p = new PropertyManager(f.getName(), f.getPath());
-
-			}
-		}
 		
 		TestTableModel aaaa = new TestTableModel();
 		tableTrans = new JTable(aaaa);
-		//tableTrans = new JTable();
 		tableTrans.setFillsViewportHeight(true);
 		
 		
@@ -219,8 +210,8 @@ public class TestApp {
 				//refreshes table according to selection
 				if (comboBox.getItemCount() != 0){
 				a = comboBox.getSelectedItem();
-				TestTableModel bbbb = new TestTableModel();
-				tableTrans.setModel(bbbb);
+				TestTableModel model = new TestTableModel();
+				tableTrans.setModel(model);
 				}
 			}
 		});
@@ -243,6 +234,7 @@ public class TestApp {
 		tabbedPane.addTab("Transliterate", null, textPane1, null);
 
 		JButton btnVoynich = new JButton("Voynich");
+		btnVoynich.setToolTipText("Switch between fonts");
 		btnVoynich.addMouseListener(new MouseAdapter() {
 			@Override
 			// on click calls font change method
@@ -282,13 +274,13 @@ public class TestApp {
 					.addContainerGap()
 					.addGroup(gl_textPane1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_textPane1.createSequentialGroup()
-							.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+							.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
 							.addContainerGap())
 						.addGroup(gl_textPane1.createSequentialGroup()
 							.addComponent(btnVoynich)
-							.addPreferredGap(ComponentPlacement.RELATED, 408, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 375, Short.MAX_VALUE)
 							.addComponent(btnTrans)
-							.addGap(63))))
+							.addGap(33))))
 		);
 		gl_textPane1.setVerticalGroup(
 			gl_textPane1.createParallelGroup(Alignment.LEADING)
@@ -338,18 +330,19 @@ public class TestApp {
 		comboBoxW.addItem("D");
 		comboBoxW.addItem("U");
 
-		JLabel lblW = new JLabel("Source: none");
+		
 
 		JTextArea textW = new JTextArea();
 		textW.setText("1");// initialvalue
-
+		JTextPane sourceLink = new JTextPane();
+		
 		JButton btnGetTextW = new JButton("Get text");
 		btnGetTextW.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				author = comboBoxW.getSelectedItem().toString();
-				lblW.setText("Source: " + author);
 				t.getResult(textW, textPaneW, author);
+				sourceLink.setText("Source: " + TestController.authorURL.toString());
 			}
 		});
 
@@ -364,6 +357,7 @@ public class TestApp {
 					textW.setText("" + page);
 					author = comboBoxW.getSelectedItem().toString();
 					t.getResult(textW, textPaneW, author);
+					sourceLink.setText("Source: " + TestController.authorURL.toString());
 				} else {
 					JOptionPane.showMessageDialog(null, "Currently at first page", "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -377,6 +371,7 @@ public class TestApp {
 				textPaneW.setText(null);
 				txtpnText.setText(null);
 				textW.setText("1");
+				sourceLink.setText("Source: none");
 			}
 		});
 
@@ -389,6 +384,7 @@ public class TestApp {
 				textW.setText("" + page);
 				author = comboBoxW.getSelectedItem().toString();
 				t.getResult(textW, textPaneW, author);
+				sourceLink.setText("Source: " + TestController.authorURL.toString());
 			}
 		});
 
@@ -400,27 +396,29 @@ public class TestApp {
 				.addGroup(gl_webPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_webPanel.createSequentialGroup()
-							.addComponent(btnPPage)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNPage)
-							.addPreferredGap(ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
-							.addComponent(btnDeleteW))
-						.addGroup(Alignment.TRAILING, gl_webPanel.createSequentialGroup()
+						.addGroup(gl_webPanel.createSequentialGroup()
+							.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+								.addGroup(gl_webPanel.createSequentialGroup()
+									.addComponent(btnPPage)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNPage)
+									.addGap(28)
+									.addComponent(sourceLink, GroupLayout.PREFERRED_SIZE, 328, GroupLayout.PREFERRED_SIZE)))
+							.addContainerGap())
+						.addGroup(gl_webPanel.createSequentialGroup()
 							.addComponent(comboBoxW, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblW)
-							.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
 							.addComponent(lblPageNr)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textW, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-							.addGap(34)
+							.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+							.addComponent(textW, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
 							.addComponent(btnGetTextW)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(18)
+							.addComponent(btnDeleteW)
+							.addGap(18)
 							.addComponent(buttonTransW, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-							.addGap(51)))
-					.addContainerGap())
+							.addGap(30))))
 		);
 		gl_webPanel.setVerticalGroup(
 			gl_webPanel.createParallelGroup(Alignment.LEADING)
@@ -428,18 +426,19 @@ public class TestApp {
 					.addContainerGap()
 					.addGroup(gl_webPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboBoxW, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblW)
-						.addComponent(btnGetTextW)
 						.addComponent(buttonTransW)
+						.addComponent(btnDeleteW)
+						.addComponent(btnGetTextW)
 						.addComponent(textW, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPageNr))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_webPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnPPage)
-						.addComponent(btnNPage)
-						.addComponent(btnDeleteW))
+					.addGroup(gl_webPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_webPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnPPage)
+							.addComponent(btnNPage))
+						.addComponent(sourceLink, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(10))
 		);
 		
@@ -454,37 +453,36 @@ public class TestApp {
 						.addGroup(gl_tablePanel.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_tablePanel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(comboBox, Alignment.LEADING, 0, 249, Short.MAX_VALUE)
+								.addComponent(comboBox, Alignment.LEADING, 0, 295, Short.MAX_VALUE)
 								.addGroup(gl_tablePanel.createSequentialGroup()
 									.addComponent(btnAdd)
-									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
 									.addComponent(btnDelete)
-									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGap(29)
 									.addComponent(refresh)))
 							.addGap(6))
 						.addGroup(gl_tablePanel.createSequentialGroup()
-							.addGap(51)
-							.addComponent(lblTable))
-						.addGroup(gl_tablePanel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
+							.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
+						.addGroup(gl_tablePanel.createSequentialGroup()
+							.addGap(75)
+							.addComponent(lblTable)))
 					.addContainerGap())
 		);
 		gl_tablePanel.setVerticalGroup(
 			gl_tablePanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tablePanel.createSequentialGroup()
-					.addGap(10)
 					.addComponent(lblTable)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(22)
 					.addGroup(gl_tablePanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAdd)
 						.addComponent(refresh)
+						.addComponent(btnAdd)
 						.addComponent(btnDelete))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 424, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(20, Short.MAX_VALUE))
 		);
 		scrollPane_3.setViewportView(tableTrans);
 		tablePanel.setLayout(gl_tablePanel);

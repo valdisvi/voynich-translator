@@ -25,7 +25,7 @@ import java.awt.GraphicsEnvironment;
 
 public class TestController {
 	
-	
+	static String authorURL = null;
 	
 
 	public void dataCreate() throws IOException {
@@ -172,6 +172,7 @@ public class TestController {
 	protected void getResult(JTextArea t, JTextPane text, String author) {
 		StringBuilder str = new StringBuilder();
 		String webpage = "http://www.voynich.nu/q01/f00" + t.getText() + "v_tr.txt"; // source
+		authorURL = webpage;
 		// labelPage.setText("Page number: " + t.getText());
 		try {
 			int page = Integer.valueOf(t.getText());
