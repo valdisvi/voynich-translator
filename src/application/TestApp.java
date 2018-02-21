@@ -199,10 +199,9 @@ public class TestApp {
 			}
 		});
 		
-		TestTableModel aaaa = new TestTableModel();
-		tableTrans = new JTable(aaaa);
+		TestTableModel modelView = new TestTableModel();
+		tableTrans = new JTable(modelView);
 		tableTrans.setFillsViewportHeight(true);
-		
 		
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
@@ -222,7 +221,6 @@ public class TestApp {
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					t.setBoxContents(comboBox);
-					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -240,7 +238,7 @@ public class TestApp {
 			// on click calls font change method
 			public void mouseClicked(MouseEvent arg0) {
 				try {
-					t.setFont(btnVoynich, txtpnEnterTextHere);
+					t.setFont(btnVoynich, txtpnEnterTextHere, tableTrans);
 				} catch (FontFormatException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -335,6 +333,7 @@ public class TestApp {
 		JTextArea textW = new JTextArea();
 		textW.setText("1");// initialvalue
 		JTextPane sourceLink = new JTextPane();
+		sourceLink.setText("Source: ");
 		
 		JButton btnGetTextW = new JButton("Get text");
 		btnGetTextW.addMouseListener(new MouseAdapter() {
