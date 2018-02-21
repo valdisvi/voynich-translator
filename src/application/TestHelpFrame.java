@@ -21,12 +21,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 
 public class TestHelpFrame extends JFrame{
-	File file= new File("helpFile.html");
+	File file= new File("Welcome.html");
 
 	public TestHelpFrame() throws Exception, IOException{
 		
-		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Welcome to user guide");
-		createNodes(top);	
+		DefaultMutableTreeNode topTop = new DefaultMutableTreeNode("User Guide Topics");
+		
+		createNodes(topTop);
+		
 		JSplitPane splitPane = new JSplitPane();
 		getContentPane().add(splitPane, BorderLayout.CENTER);
 		
@@ -35,12 +37,13 @@ public class TestHelpFrame extends JFrame{
 		JEditorPane editorPane = new JEditorPane();
 	
 		editorPane.setEditable(false);
-		JTree tree = new JTree(top);
+		JTree tree = new JTree(topTop);
 		scrollPane.setViewportView(tree);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		splitPane.setRightComponent(scrollPane_1);
 		editorPane.setContentType("text/html");
 		editorPane.setPage(file.toURI().toURL());
+		
 		scrollPane_1.setViewportView(editorPane);	
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -64,11 +67,13 @@ public class TestHelpFrame extends JFrame{
 		setTitle("User Guide");	
 		setVisible(true);
 	}
-	private void createNodes(DefaultMutableTreeNode top) {
-		File file2= new File("helpFile2.html");
+	private void createNodes(DefaultMutableTreeNode topTop) {
+		File file2= new File("Transliteration Tab.html");
 	    DefaultMutableTreeNode page = null;
+	    DefaultMutableTreeNode	top=new DefaultMutableTreeNode(file);
+	    topTop.add(top);
 	    page = new DefaultMutableTreeNode(file2);
-	        top.add(page);
+	    topTop.add(page);
 
 	}
 	}
