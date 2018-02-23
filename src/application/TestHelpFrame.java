@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.FileSystem;
 
 import javax.swing.JFrame;
@@ -42,7 +43,8 @@ public class TestHelpFrame extends JFrame{
 		JScrollPane scrollPane_1 = new JScrollPane();
 		splitPane.setRightComponent(scrollPane_1);
 		editorPane.setContentType("text/html");
-		editorPane.setPage(file.toURI().toURL());
+		URL  url= getClass().getResource(file.getName());
+		editorPane.setPage(url);
 		
 		scrollPane_1.setViewportView(editorPane);	
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -51,11 +53,13 @@ public class TestHelpFrame extends JFrame{
 			DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 			if (node==null ) return;
 					Object userObj= node.getUserObject();
+					File userFile= ((File) userObj);
 				if (node.isLeaf()){
 					try {
-						editorPane.setPage(((File) userObj).toURI().toURL());
+						URL  url= getClass().getResource(userFile.getName());
+						editorPane.setPage(url);
 					} catch (Exception e1) {
-						e1.printStackTrace();
+						
 					}
 			};
 		}});
@@ -68,12 +72,20 @@ public class TestHelpFrame extends JFrame{
 		setVisible(true);
 	}
 	private void createNodes(DefaultMutableTreeNode topTop) {
-		File file2= new File("Transliteration Tab.html");
+		File file2= new File("Transliteration_tab.html");
+		File file3= new File("Transliteration_Table.html");
+		File file4= new File("Web_Tab.html");
 	    DefaultMutableTreeNode page = null;
 	    DefaultMutableTreeNode	top=new DefaultMutableTreeNode(file);
+	    DefaultMutableTreeNode	page2=null;  
+	    DefaultMutableTreeNode	page3=null;   
 	    topTop.add(top);
 	    page = new DefaultMutableTreeNode(file2);
 	    topTop.add(page);
+	    page2 = new DefaultMutableTreeNode(file3);
+	    topTop.add(page2);
+	    page3 = new DefaultMutableTreeNode(file4);
+	    topTop.add(page3);
 
 	}
 	}
