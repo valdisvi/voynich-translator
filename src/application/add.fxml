@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="620.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.addController">
+<AnchorPane prefHeight="620.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.addController">
    <children>
       <TextField fx:id="addTableNameTextField" layoutX="127.0" layoutY="37.0" promptText="Enter New Table Name" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="37.0" />
       <TextArea fx:id="addTableTextArea" layoutX="83.0" layoutY="84.0" prefHeight="433.0" prefWidth="270.0" promptText="Create a new table in format                     symbol=symbol;                                          if you want edit existing table then enter existing Table Name to rewrite it." wrapText="true" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
