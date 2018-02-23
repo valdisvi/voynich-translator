@@ -39,6 +39,7 @@ public class TestHelpFrame extends JFrame{
 	
 		editorPane.setEditable(false);
 		JTree tree = new JTree(topTop);
+		tree.setRootVisible(false);
 		scrollPane.setViewportView(tree);
 		JScrollPane scrollPane_1 = new JScrollPane();
 		splitPane.setRightComponent(scrollPane_1);
