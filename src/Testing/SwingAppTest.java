@@ -6,13 +6,13 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import application.TestApp;
+import application.SwingApp;
 
-public class TestAppTest {
-static TestApp app;
+public class SwingAppTest {
+static SwingApp app;
 	@Before
 	public void setUp() throws Exception {
-		app= new TestApp();
+		app= new SwingApp();
 	}
 
 	@After

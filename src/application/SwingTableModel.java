@@ -7,14 +7,14 @@ import javax.swing.table.AbstractTableModel;
 
 
 @SuppressWarnings("serial")
-public class TestTableModel extends AbstractTableModel {
+public class SwingTableModel extends AbstractTableModel {
 
-	Transliteration chosenTransliteration = (Transliteration)TestApp.a;
+	Transliteration chosenTransliteration = (Transliteration)SwingApp.a;
     LinkedHashMap<String, String> transliterationRules = chosenTransliteration.getList();
     private Map<String, String> data = transliterationRules;
     private String[] keys;
 
-    public TestTableModel() {
+    public SwingTableModel() {
         keys = data.keySet().toArray(new String[data.size()]);
     }
 

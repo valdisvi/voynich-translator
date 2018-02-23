@@ -18,16 +18,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.TestAddC;
-import application.TestController;
+import application.SwingAddC;
+import application.SwingController;
 
-public class TestAddCTest {
-	TestAddC t;
-//TestController tc;
+public class SwingAddCTest {
+	SwingAddC t;
+//SwingController tc;
 	@Before
 	public void setUp() throws Exception {
-	 t= new TestAddC();
-//	 tc= new TestController();
+	 t= new SwingAddC();
+//	 tc= new SwingController();
 	}
 
 	@After

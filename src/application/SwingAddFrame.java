@@ -25,7 +25,7 @@ import java.awt.event.ItemEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
-public class TestAddFrame extends JFrame {
+public class SwingAddFrame extends JFrame {
 
 	private JPanel contentPane;
 
@@ -38,9 +38,9 @@ public class TestAddFrame extends JFrame {
 	 */
 
 	//constructor for the frame that gets created on add. 
-	public TestAddFrame() {
-		TestController t = new TestController();
-		TestAddC tc = new TestAddC();
+	public SwingAddFrame() {
+		SwingController t = new SwingController();
+		SwingAddC tc = new SwingAddC();
 		setBounds(450, 130, 400, 574);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Add table..");

@@ -36,10 +36,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 
-public class TestApp {
+public class SwingApp {
 
 	private JFrame mainFrame;
-	private TestController t;
+	private SwingController t;
 	String author;
 	private JTable tableTrans;
 	public static Object a ;
@@ -53,7 +53,7 @@ public class TestApp {
 			@Override
 			public void run() {
 				try {
-					TestApp window = new TestApp();
+					SwingApp window = new SwingApp();
 					window.mainFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,8 +67,8 @@ public class TestApp {
 	 * 
 	 * @throws IOException
 	 */
-	public TestApp() throws IOException {
-		t = new TestController();
+	public SwingApp() throws IOException {
+		t = new SwingController();
 		t.dataCreate();
 		initialize();
 	}
@@ -79,7 +79,7 @@ public class TestApp {
 	 * @throws IOException
 	 */
 	private void initialize() throws IOException {
-		t = new TestController();
+		t = new SwingController();
 		mainFrame = new JFrame();
 		mainFrame.setBounds(100, 100, 1024, 620);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,7 +97,7 @@ public class TestApp {
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					@SuppressWarnings("unused")
-					JFrame helpFrame = new TestHelpFrame();
+					JFrame helpFrame = new SwingHelpFrame();
 					} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -168,7 +168,7 @@ public class TestApp {
 			public void mouseClicked(MouseEvent arg0) {
 				// calls for creation of an add frame
 				@SuppressWarnings("unused")
-				JFrame addFrame = new TestAddFrame();
+				JFrame addFrame = new SwingAddFrame();
 			}
 		});
 
@@ -177,7 +177,7 @@ public class TestApp {
 		// loads comboBox values
 		t.setBoxContents(comboBox);
 		
-		TestTableModel modelView = new TestTableModel();
+		SwingTableModel modelView = new SwingTableModel();
 		tableTrans = new JTable(modelView);
 		tableTrans.setFillsViewportHeight(true);
 
@@ -217,7 +217,7 @@ public class TestApp {
 				//and refreshes table according to selection
 				if (comboBox.getItemCount() != 0){
 				a = comboBox.getSelectedItem();
-				TestTableModel model = new TestTableModel();
+				SwingTableModel model = new SwingTableModel();
 				tableTrans.setModel(model);
 				}
 			}
@@ -362,7 +362,7 @@ public class TestApp {
 			public void mouseClicked(MouseEvent e) {
 				author = comboBoxW.getSelectedItem().toString();
 				t.getResult(textW, textPaneW, author, group);
-				sourceLink.setText("Source: " + TestController.authorURL.toString());
+				sourceLink.setText("Source: " + SwingController.authorURL.toString());
 			}
 		});
 
@@ -377,7 +377,7 @@ public class TestApp {
 					textW.setText("" + page);
 					author = comboBoxW.getSelectedItem().toString();
 					t.getResult(textW, textPaneW, author, group);
-					sourceLink.setText("Source: " + TestController.authorURL.toString());
+					sourceLink.setText("Source: " + SwingController.authorURL.toString());
 				} else {
 					JOptionPane.showMessageDialog(null, "Currently at first page", "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -408,7 +408,7 @@ public class TestApp {
 				textW.setText("" + page);
 				author = comboBoxW.getSelectedItem().toString();
 				t.getResult(textW, textPaneW, author, group);
-				sourceLink.setText("Source: " + TestController.authorURL.toString());
+				sourceLink.setText("Source: " + SwingController.authorURL.toString());
 			}
 		});
 

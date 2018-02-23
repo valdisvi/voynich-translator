@@ -18,9 +18,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 
-public class TestAddC {
+public class SwingAddC {
 
-	TestController t = new TestController();
+	SwingController t = new SwingController();
 
 	// loads rules into Text
 	// TODO need to show from the top not bottom of rules.

@@ -21,10 +21,10 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 
-public class TestHelpFrame extends JFrame{
+public class SwingHelpFrame extends JFrame{
 	File file= new File("Welcome.html");
 
-	public TestHelpFrame() throws Exception, IOException{
+	public SwingHelpFrame() throws Exception, IOException{
 		
 		DefaultMutableTreeNode topTop = new DefaultMutableTreeNode("User Guide Topics");
 		

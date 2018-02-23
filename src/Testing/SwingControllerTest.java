@@ -12,17 +12,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.TestAddC;
-import application.TestController;
+import application.SwingAddC;
+import application.SwingController;
 import application.TransliterationProcess;
 
-public class TestControllerTest {
-	TestController te;
-	TestAddC t;
+public class SwingControllerTest {
+	SwingController te;
+	SwingAddC t;
 	@Before
 	public void setUp() throws Exception {
-		te=new TestController();
-		t=new TestAddC();
+		te=new SwingController();
+		t=new SwingAddC();
 	}
 
 	@After

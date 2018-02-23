@@ -28,7 +28,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 
-public class TestController {
+public class SwingController {
 	
 	static String authorURL = null;
 	
@@ -177,7 +177,7 @@ public class TestController {
 			box.addItem(rules);
 			++n2;
 		}
-		TestApp.a = box.getItemAt(0);
+		SwingApp.a = box.getItemAt(0);
 	}
 	
 	//gets selected value from a button group 
