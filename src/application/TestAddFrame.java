@@ -37,11 +37,11 @@ public class TestAddFrame extends JFrame {
 	 * Create the frame.
 	 */
 
-	// need to work on auto-resizing and stuff.
+	//constructor for the frame that gets created on add. 
 	public TestAddFrame() {
 		TestController t = new TestController();
 		TestAddC tc = new TestAddC();
-		setBounds(150, 150, 400, 574);
+		setBounds(450, 130, 400, 574);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Add table..");
 
@@ -51,6 +51,10 @@ public class TestAddFrame extends JFrame {
 
 		JComboBox comboBox = new JComboBox();
 		JTextArea ruleEditor = new JTextArea();
+		StringBuilder toolTipAdd = new StringBuilder();
+		toolTipAdd.append(
+				"<html>Create a new table in format<br>symbol=symbol;<br>if you want edit existing table, then enter existing<br>Table Name to rewrite it</html>");
+		ruleEditor.setToolTipText(toolTipAdd.toString());
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				Object a = comboBox.getSelectedItem();
@@ -68,11 +72,9 @@ public class TestAddFrame extends JFrame {
 			}
 		});
 
-		// check how to fix unneccessary trycatch
 		try {
 			t.setBoxContents(comboBox);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -83,7 +85,8 @@ public class TestAddFrame extends JFrame {
 				String b = nameEditor.getText();
 				tc.addTable(b, ruleEditor);
 				nameEditor.setText("");
-				//need to solve the problem of updating the contents after creating 
+				//problem of refreshing contents of combobox
+				//kinda solved by adding a "refresh" button. 
 			}
 		});
 

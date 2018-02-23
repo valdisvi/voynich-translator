@@ -54,6 +54,7 @@ public class TestAddC {
 	}
 
 	public void addTable(String name, JTextArea rules) {
+		boolean checkFile = new File("VoynichData/", name + ".properties").exists();
 		if (name.equals("")) {
 			JOptionPane.showMessageDialog(null, "Name cannot be empty." + "\nPlease fill out the name form.", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -65,19 +66,20 @@ public class TestAddC {
 			JOptionPane.showMessageDialog(null, "Table cannot be empty" + "\nPlease fill out the rules.", "Empty table",
 					JOptionPane.ERROR_MESSAGE);
 		}
-		// required to ask confirmation for rewriting table, but im lazy and
-		// confused atm.
-		/*
-		 * else if (!(rules.getText().isEmpty())){ Alert alert = new
-		 * Alert(AlertType.CONFIRMATION); alert.setTitle("Confirm table edit");
-		 * alert.setHeaderText("Table " + addTableNameTextField.getText() +
-		 * " already exists");
-		 * alert.setContentText("Are you sure you want to overwrite table " +
-		 * addTableNameTextField.getText()+"?"); Optional<ButtonType> result =
-		 * alert.showAndWait(); if (result.get() == ButtonType.OK){
-		 * writeToFile(); } }
-		 */else {
+		// confirmation for overwriting table
+		else if (checkFile) {
+			int check = (Integer) JOptionPane.showOptionDialog(null, "Do you want to overwrite table " + name + "?",
+					"Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			if (check == JOptionPane.YES_OPTION) {
 			writeToFile(name, rules);
+					//  check for successful/ unsuccessful file removal
+					JOptionPane.showMessageDialog(null, "Table " + name + " overwritten", "Success!",
+							JOptionPane.INFORMATION_MESSAGE);}
+		}
+		else {
+			writeToFile(name, rules);
+			JOptionPane.showMessageDialog(null, "Table succesfully created", "Success!",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}
@@ -88,8 +90,7 @@ public class TestAddC {
 		FileWriter writer;
 		try {
 			writer = new FileWriter(file, false);
-			JOptionPane.showMessageDialog(null, "Table succesfully created", "Success!",
-					JOptionPane.INFORMATION_MESSAGE);
+			
 			PrintWriter printer = new PrintWriter(writer);
 			printer.append(rules.getText());
 			printer.close();
