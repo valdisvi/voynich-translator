@@ -14,13 +14,14 @@ The web source for getting transcribed pages is http://voynich.nu/
 - Load transcribed pages from a web source 
   - Pick different transcription versions
 
-### Improvements 
+### General improvements 
 
-- More intuitive, user-friendlier design;
-- Possible to get transcriptions of most quires and pages of the manuscript;
-  - Additional buttons and page support added;
-- User manual added to the application;
-- No more JavaFX dependencies.
+- More intuitive, user-friendlier design
+- Possible to get transcriptions of most quires and pages of the manuscript
+  - Additional buttons and page support added
+- Documentation added
+- User manual added to the application
+- No more JavaFX dependencies
 
 For improvements and fixes of an inherited JavaFX dependant project, please refer to [Source Investigation.md](https://github.com/beatrise/voynich-translator/blob/master/sourceInvestigation.md) file
 
@@ -33,7 +34,9 @@ To run inherited project class files with JavaFX dependencies you have to instal
 ```
 sudo apt-get install openjfx openjfx-source
 ```
-For development use [e(fx)clipse](https://www.eclipse.org/efxclipse/install.html) or other tool, which supports Java FX development environment.
+For JavaFX development use [e(fx)clipse](https://www.eclipse.org/efxclipse/install.html) or other tool, which supports Java FX development environment.
+
+For simplifying Swing GUI development we recommend you use [WindowBuilder plugin](https://www.eclipse.org/windowbuilder/) or a similar tool.
 
 ### Installing
 Import GitHub Project into Eclipse [how-to](https://github.com/collab-uniba/socialcde4eclipse/wiki/How-to-import-a-GitHub-project-into-Eclipse)
@@ -41,17 +44,19 @@ Import GitHub Project into Eclipse [how-to](https://github.com/collab-uniba/soci
 or download archive file of the project and import it into Eclipse [how-to](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-importproject.htm)
 ## Deployment
 
-To deploy this application download the NAME?.jar file to you computer. 
+To deploy this application download the VoynichSwing.jar file to you computer. 
 And execute like this:
 ```
 cd directoryOfJarFile
-java -jar NAME?.jar
+java -jar VoynichSwing.jar
 ```
-For instructions on how to use this application please check project folder helpFiles, or run the application and click on button "Help"
-## Built With
+Or to deploy directly with Java JDK Runtime Environment on Linux, change the .jar file permissions with terminal command:
+```
+$chmod +x VoynichSwing.jar
+```
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
+For instructions on how to use this application please check project folder helpFiles, or run the application and click on button "Help"
+
 
 ## Versioning
 
