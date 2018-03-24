@@ -1,29 +1,24 @@
 package application;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.WindowConstants;
 
 public class SwingAddFrame extends JFrame {
 
@@ -37,7 +32,7 @@ public class SwingAddFrame extends JFrame {
 	 * Create the frame.
 	 */
 
-	//constructor for the frame that gets created on add. 
+	// constructor for the frame that gets created on add.
 	public SwingAddFrame() {
 		SwingController t = new SwingController();
 		SwingAddC tc = new SwingAddC();
@@ -85,8 +80,8 @@ public class SwingAddFrame extends JFrame {
 				String b = nameEditor.getText();
 				tc.addTable(b, ruleEditor);
 				nameEditor.setText("");
-				//problem of refreshing contents of combobox
-				//kinda solved by adding a "refresh" button. 
+				// problem of refreshing contents of combobox
+				// kinda solved by adding a "refresh" button.
 			}
 		});
 

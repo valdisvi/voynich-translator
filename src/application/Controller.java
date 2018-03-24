@@ -1,22 +1,5 @@
 package application;
 
-import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import javafx.util.Callback;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -33,8 +16,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javafx.util.Callback;
+
 public class Controller {
-	
+
 	// Controller elements for Transliterate tab
 	@FXML
 	Button buttonTransliterate;
@@ -60,7 +71,6 @@ public class Controller {
 	Button deleteButton;
 	@FXML
 	Button toVoynich;
-	
 
 	// Controller elements for Web tab
 	@FXML
@@ -91,7 +101,6 @@ public class Controller {
 	ComboBox webComboBoxSource;
 	@FXML
 	Button webButtonTransliterate;
-	
 
 	StringBuilder str = new StringBuilder();
 	String userSelect = null; // selected author
@@ -115,104 +124,95 @@ public class Controller {
 		comboBoxSelect.setPromptText("Choose resource");
 		labelSource.setText("Source: " + "none");
 
-		//FIXIT
-		//ComboBox and Transliteration initialization
-		/*
-	try {
-			setTransliterationComboBox();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}  
-		//setTransliterationTable(); */
-		
 		File[] allProperties = this.finder("../VoynichData");
-		
+
 		InputStream Currier = this.getClass().getResourceAsStream("/data/Currier.properties");
-        InputStream FSG = this.getClass().getResourceAsStream("/data/FSG.properties");
-        InputStream Bennett_to_FSG = this.getClass().getResourceAsStream("/data/Bennett_to_FSG.properties");
-        InputStream Bennett = this.getClass().getResourceAsStream("/data/Bennett.properties");
-        InputStream BasicEVA_to_ASCIIsounds = this.getClass().getResourceAsStream("/data/BasicEVA_to_ASCIIsounds.properties");
-        if (allProperties == null) {
-            new File("VoynichData").mkdirs();
-            BufferedReader Currierbr = new BufferedReader(new InputStreamReader(Currier));
-            StringBuilder sb = new StringBuilder();
-            String line = Currierbr.readLine();
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = Currierbr.readLine();
-            }
-            File file = new File("VoynichData/Currier.properties");
-            FileWriter writer = new FileWriter(file, false);
-            PrintWriter printer = new PrintWriter(writer);
-            printer.append(sb.toString());
-            printer.close();
-            this.setTransliterationComboBox();
-            this.setTransliterationTable();
-            BufferedReader FSGbr = new BufferedReader(new InputStreamReader(FSG));
-            StringBuilder sb2 = new StringBuilder();
-            String line2 = FSGbr.readLine();
-            while (line2 != null) {
-                sb2.append(line2);
-                sb2.append(System.lineSeparator());
-                line2 = FSGbr.readLine();
-            }
-            File file2 = new File("VoynichData/FSG.properties");
-            FileWriter writer2 = new FileWriter(file2, false);
-            PrintWriter printer2 = new PrintWriter(writer2);
-            printer2.append(sb2.toString());
-            printer2.close();
-            this.setTransliterationComboBox();
-            this.setTransliterationTable();
-            BufferedReader Bennett_to_FSGbr = new BufferedReader(new InputStreamReader(Bennett_to_FSG));
-            StringBuilder sb3 = new StringBuilder();
-            String line3 = Bennett_to_FSGbr.readLine();
-            while (line3 != null) {
-                sb3.append(line3);
-                sb3.append(System.lineSeparator());
-                line3 = Bennett_to_FSGbr.readLine();
-            }
-            File file3 = new File("VoynichData/Bennett_to_FSG.properties");
-            FileWriter writer3 = new FileWriter(file3, false);
-            PrintWriter printer3 = new PrintWriter(writer3);
-            printer3.append(sb3.toString());
-            printer3.close();
-           this.setTransliterationComboBox();
-           this.setTransliterationTable();
-            BufferedReader Bennettbr = new BufferedReader(new InputStreamReader(Bennett));
-            StringBuilder sb4 = new StringBuilder();
-            String line4 = Bennettbr.readLine();
-            while (line4 != null) {
-                sb4.append(line4);
-                sb4.append(System.lineSeparator());
-                line4 = Bennettbr.readLine();
-            }
-            File file4 = new File("VoynichData/Bennett.properties");
-            FileWriter writer4 = new FileWriter(file4, false);
-            PrintWriter printer4 = new PrintWriter(writer4);
-            printer4.append(sb4.toString());
-            printer4.close();
-           this.setTransliterationComboBox();
-           this.setTransliterationTable();
-            BufferedReader BasicEVA_to_ASCIIsoundsbr = new BufferedReader(new InputStreamReader(BasicEVA_to_ASCIIsounds));
-            StringBuilder sb5 = new StringBuilder();
-            String line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
-            while (line5 != null) {
-                sb5.append(line5);
-                sb5.append(System.lineSeparator());
-                line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
-            }
-            File file5 = new File("VoynichData/BasicEVA_to_ASCIIsounds.properties");
-            FileWriter writer5 = new FileWriter(file5, false);
-            PrintWriter printer5 = new PrintWriter(writer5);
-            printer5.append(sb5.toString());
-            printer5.close();
-           this.setTransliterationComboBox();
-           this.setTransliterationTable();
-        }
+		InputStream FSG = this.getClass().getResourceAsStream("/data/FSG.properties");
+		InputStream Bennett_to_FSG = this.getClass().getResourceAsStream("/data/Bennett_to_FSG.properties");
+		InputStream Bennett = this.getClass().getResourceAsStream("/data/Bennett.properties");
+		InputStream BasicEVA_to_ASCIIsounds = this.getClass()
+				.getResourceAsStream("/data/BasicEVA_to_ASCIIsounds.properties");
+		if (allProperties == null) {
+			new File(Main.dataFolder).mkdirs();
+			BufferedReader Currierbr = new BufferedReader(new InputStreamReader(Currier));
+			StringBuilder sb = new StringBuilder();
+			String line = Currierbr.readLine();
+			while (line != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = Currierbr.readLine();
+			}
+			File file = new File("VoynichData/Currier.properties");
+			FileWriter writer = new FileWriter(file, false);
+			PrintWriter printer = new PrintWriter(writer);
+			printer.append(sb.toString());
+			printer.close();
+			this.setTransliterationComboBox();
+			this.setTransliterationTable();
+			BufferedReader FSGbr = new BufferedReader(new InputStreamReader(FSG));
+			StringBuilder sb2 = new StringBuilder();
+			String line2 = FSGbr.readLine();
+			while (line2 != null) {
+				sb2.append(line2);
+				sb2.append(System.lineSeparator());
+				line2 = FSGbr.readLine();
+			}
+			File file2 = new File("VoynichData/FSG.properties");
+			FileWriter writer2 = new FileWriter(file2, false);
+			PrintWriter printer2 = new PrintWriter(writer2);
+			printer2.append(sb2.toString());
+			printer2.close();
+			this.setTransliterationComboBox();
+			this.setTransliterationTable();
+			BufferedReader Bennett_to_FSGbr = new BufferedReader(new InputStreamReader(Bennett_to_FSG));
+			StringBuilder sb3 = new StringBuilder();
+			String line3 = Bennett_to_FSGbr.readLine();
+			while (line3 != null) {
+				sb3.append(line3);
+				sb3.append(System.lineSeparator());
+				line3 = Bennett_to_FSGbr.readLine();
+			}
+			File file3 = new File("VoynichData/Bennett_to_FSG.properties");
+			FileWriter writer3 = new FileWriter(file3, false);
+			PrintWriter printer3 = new PrintWriter(writer3);
+			printer3.append(sb3.toString());
+			printer3.close();
+			this.setTransliterationComboBox();
+			this.setTransliterationTable();
+			BufferedReader Bennettbr = new BufferedReader(new InputStreamReader(Bennett));
+			StringBuilder sb4 = new StringBuilder();
+			String line4 = Bennettbr.readLine();
+			while (line4 != null) {
+				sb4.append(line4);
+				sb4.append(System.lineSeparator());
+				line4 = Bennettbr.readLine();
+			}
+			File file4 = new File("VoynichData/Bennett.properties");
+			FileWriter writer4 = new FileWriter(file4, false);
+			PrintWriter printer4 = new PrintWriter(writer4);
+			printer4.append(sb4.toString());
+			printer4.close();
+			this.setTransliterationComboBox();
+			this.setTransliterationTable();
+			BufferedReader BasicEVA_to_ASCIIsoundsbr = new BufferedReader(
+					new InputStreamReader(BasicEVA_to_ASCIIsounds));
+			StringBuilder sb5 = new StringBuilder();
+			String line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
+			while (line5 != null) {
+				sb5.append(line5);
+				sb5.append(System.lineSeparator());
+				line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
+			}
+			File file5 = new File("VoynichData/BasicEVA_to_ASCIIsounds.properties");
+			FileWriter writer5 = new FileWriter(file5, false);
+			PrintWriter printer5 = new PrintWriter(writer5);
+			printer5.append(sb5.toString());
+			printer5.close();
+			this.setTransliterationComboBox();
+			this.setTransliterationTable();
+		}
 
 	}
-
 
 	public void actionNextPage() {
 		pageId = pageId + 1;
@@ -262,9 +262,9 @@ public class Controller {
 	private void getResult() {
 		String webpage = "http://www.voynich.nu/q01/f00" + pageNumber.getText() + "v_tr.txt"; // source
 		labelPage.setText("Page number: " + pageId);
-		try{
-		pageId = Integer.valueOf(pageNumber.getText());
-		}catch (Exception ex){
+		try {
+			pageId = Integer.valueOf(pageNumber.getText());
+		} catch (Exception ex) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Error cannot access webpage");
@@ -283,13 +283,15 @@ public class Controller {
 			// variables
 			String inputLine;
 			String removeStartsWith = "#";
-			// prints out only selected author text without any comments and other unnecessary things
+			// prints out only selected author text without any comments and
+			// other unnecessary things
 			while ((inputLine = in.readLine()) != null) {
 				// removes like if it start with #
 				if (inputLine.startsWith(removeStartsWith)) {
 					inputLine = inputLine.replace(System.getProperty("line.separator"), "");
 				}
-				// removes source info part that start with <f1v.P.1;H> (as example)
+				// removes source info part that start with <f1v.P.1;H> (as
+				// example)
 				if (inputLine.matches("<f\\d+[v|r]\\.P\\.\\d+;" + userSelect + ">\\s.*")) {
 					inputLine = inputLine.replaceAll("<f\\d+[v|r]\\.P\\.\\d+;" + userSelect + ">\\s*", "");
 					inputLine = inputLine.replace("{plant}", "");
@@ -298,7 +300,7 @@ public class Controller {
 			}
 			webInputText.setText(str.toString());
 			str.setLength(0);
-			
+
 			if (userSelect == null) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");
@@ -306,7 +308,7 @@ public class Controller {
 				String s = "Please choose resource from the list.";
 				alert.setContentText(s);
 				alert.show();
-			}else if (webInputText.getText().equals("")){
+			} else if (webInputText.getText().equals("")) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");
 				alert.setHeaderText("Selected resource does not exist in this page");
@@ -326,41 +328,40 @@ public class Controller {
 		}
 	}
 
-	 public void setTransliterationComboBox() throws IOException {
-	        File[] allProperties = this.finder("VoynichData");
-	        ObservableList transliterationRulesObsList = FXCollections.observableArrayList();
-	        File[] arrfile = allProperties;
-	        int n = arrfile.length;
-	        int n2 = 0;
-	        while (n2 < n) {
-	            File properties = arrfile[n2];
-	            String path = properties.getPath();
-	            String name = properties.getName();
-	            PropertyManager pManager = new PropertyManager(name, path);
-	            Transliteration rules = pManager.getRules();
-	            transliterationRulesObsList.add((Object)rules);
-	            ++n2;
-	        }
-	        this.comboBoxSource.setItems(transliterationRulesObsList);
-	        this.comboBoxSource.setValue(transliterationRulesObsList.get(0));
-	    }
-
+	public void setTransliterationComboBox() throws IOException {
+		File[] allProperties = this.finder(Main.dataFolder);
+		ObservableList transliterationRulesObsList = FXCollections.observableArrayList();
+		File[] arrfile = allProperties;
+		int n = arrfile.length;
+		int n2 = 0;
+		while (n2 < n) {
+			File properties = arrfile[n2];
+			String path = properties.getPath();
+			String name = properties.getName();
+			PropertyManager pManager = new PropertyManager(name, path);
+			Transliteration rules = pManager.getRules();
+			transliterationRulesObsList.add((Object) rules);
+			++n2;
+		}
+		this.comboBoxSource.setItems(transliterationRulesObsList);
+		this.comboBoxSource.setValue(transliterationRulesObsList.get(0));
+	}
 
 	public void setTransliterationTable() {
-		
-		this.tableColumnFrom.setCellValueFactory(cellData -> new SimpleStringProperty((String)((Map.Entry)cellData.getValue()).getKey()));
-        this.tableColumnTo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(((Map.Entry)cellData.getValue()).getValue())));
-        Transliteration chosenTransliteration = (Transliteration)this.comboBoxSource.getValue();
-        LinkedHashMap<String, String> transliterationRules = chosenTransliteration.getList();
-        this.tableTranslitRules.getItems().clear();
-        this.tableTranslitRules.getItems().addAll(transliterationRules.entrySet());
-        this.tableColumnFrom.setText("From");
-        this.tableColumnTo.setText("To"); 
 
-		// check if Voynich font needed
-		//tableColumnFrom.setStyle("-fx-font-family: \"Voynich\""); 
+		this.tableColumnFrom.setCellValueFactory(
+				cellData -> new SimpleStringProperty((String) ((Map.Entry) cellData.getValue()).getKey()));
+		this.tableColumnTo.setCellValueFactory(
+				cellData -> new SimpleStringProperty(String.valueOf(((Map.Entry) cellData.getValue()).getValue())));
+		Transliteration chosenTransliteration = (Transliteration) this.comboBoxSource.getValue();
+		LinkedHashMap<String, String> transliterationRules = chosenTransliteration.getList();
+		this.tableTranslitRules.getItems().clear();
+		this.tableTranslitRules.getItems().addAll(transliterationRules.entrySet());
+		this.tableColumnFrom.setText("From");
+		this.tableColumnTo.setText("To");
+
 	}
-	
+
 	public void refreshTransliterationComboBox() throws IOException {
 
 		Transliteration lastValue = (Transliteration) comboBoxSource.getValue();
@@ -375,13 +376,13 @@ public class Controller {
 		List<Transliteration> oldItemList = new ArrayList<Transliteration>(oldItems);
 		List<Transliteration> newItemList = new ArrayList<Transliteration>(newItems);
 
-		for(Transliteration newI : newItemList){
-			if(newI.isUnseen(oldItemList)){
+		for (Transliteration newI : newItemList) {
+			if (newI.isUnseen(oldItemList)) {
 				newItem = newI;
 				break;
 			}
 		}
-		if(newItem == null){
+		if (newItem == null) {
 			for (Transliteration item : newItems) {
 				System.out.println(item.getName() + " == " + name);
 				if (item.getName().equals(name)) {
@@ -389,8 +390,7 @@ public class Controller {
 					break;
 				}
 			}
-		}
-		else {
+		} else {
 			comboBoxSource.setValue(newItem);
 		}
 		setTransliterationTable();
@@ -405,7 +405,7 @@ public class Controller {
 			}
 		});
 	}
-	
+
 	public void addButtonAction() throws IOException {
 		Stage addStage = new Stage();
 		Parent webroot = FXMLLoader.load(getClass().getResource("add.fxml"));
@@ -434,87 +434,89 @@ public class Controller {
 			}
 		});
 	}
-	
-	
-	public void deleteButtonAction(){
-		//deletes selected table
-		try{
-			File file = new File("VoynichData/"+comboBoxSource.getValue());
-    		if(comboBoxSource.getValue().toString().equals("Currier.properties") 
-					|| comboBoxSource.getValue().toString().equals("BasicEVA_to_ASCIIsounds.properties") 
+
+	public void deleteButtonAction() {
+		// deletes selected table
+		try {
+			File file = new File(Main.dataFolder + "/" + comboBoxSource.getValue());
+			if (comboBoxSource.getValue().toString().equals("Currier.properties")
+					|| comboBoxSource.getValue().toString().equals("BasicEVA_to_ASCIIsounds.properties")
 					|| comboBoxSource.getValue().toString().equals("Bennett_to_FSG.properties")
 					|| comboBoxSource.getValue().toString().equals("Bennett.properties")
-					|| comboBoxSource.getValue().toString().equals("FSG.properties")){
-    			
-    			Alert alert = new Alert(AlertType.ERROR);
+					|| comboBoxSource.getValue().toString().equals("FSG.properties")) {
+
+				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");
 				alert.setHeaderText("Cannot delete default table");
 				alert.show();
-    		}else{
-    			Alert alert = new Alert(AlertType.CONFIRMATION);
-    			alert.setTitle("Confirm delete table");
-    			alert.setHeaderText("Do you want to delete " + comboBoxSource.getValue() + " table?");
-    			Optional<ButtonType> result = alert.showAndWait();
-    			if (result.get() == ButtonType.OK){
-    				file.delete();
-    				Alert alert2 = new Alert(AlertType.INFORMATION);
-    				alert2.setTitle("Success");
-    				alert2.setHeaderText("Table " + file.getName() + " was successfully deleted!");
-    				alert2.show();
-    				refreshOnDelete();
-    			}
-    		}
-    	}catch(Exception e){
-    		Alert alert = new Alert(AlertType.ERROR);
+			} else {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Confirm delete table");
+				alert.setHeaderText("Do you want to delete " + comboBoxSource.getValue() + " table?");
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					file.delete();
+					Alert alert2 = new Alert(AlertType.INFORMATION);
+					alert2.setTitle("Success");
+					alert2.setHeaderText("Table " + file.getName() + " was successfully deleted!");
+					alert2.show();
+					refreshOnDelete();
+				}
+			}
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Could not delete table");
 			String s = "There was a problem with delete command";
 			alert.setContentText(s);
-			alert.show();;
-    	}
+			alert.show();
+			;
+		}
 	}
-	
+
 	public void refreshOnDelete() throws IOException {
 		setTransliterationComboBox();
 		ObservableList items = comboBoxSource.getItems();
 		comboBoxSource.setValue(items.get(0));
 
 	}
-	
+
 	public void transliterate() throws IOException, InterruptedException {
-		String path = "VoynichData/"+comboBoxSource.getValue();
+		String path = Main.dataFolder + "/" + comboBoxSource.getValue();
 		TransliterationProcess tp = new TransliterationProcess(path, "Currier");
 		outputText.setText(tp.transliterate(inputText.getText()));
 	}
-	
-	public void webTransliterate() throws IOException, InterruptedException{
-		String path = "VoynichData/"+comboBoxSource.getValue();
+
+	public void webTransliterate() throws IOException, InterruptedException {
+		String path = Main.dataFolder + "/" + comboBoxSource.getValue();
 		TransliterationProcess tp = new TransliterationProcess(path, "Currier");
 		webOutputText.setText(tp.transliterate(webInputText.getText()));
 	}
-	
-	public void setFontToVoynich(){
-		if(inputText.getFont().toString().contains("System")){
-			inputText.setFont(Font.font ("Voynich"));
+
+	public void setFontToVoynich() {
+		if (inputText.getFont().toString().contains("System")) {
+			inputText.setFont(Font.font("Voynich"));
 			toVoynich.setText("Latin");
 			tableColumnFrom.setStyle("-fx-font-family: \"Voynich\"");
 			tableColumnFrom.setCellFactory(getCustomCellFactory("voynich"));
-		}else{
+		} else {
 			inputText.setFont(Font.font("System"));
 			toVoynich.setText("Voynich");
 			tableColumnFrom.setStyle("-fx-font-family: \"System\"");
 			tableColumnFrom.setCellFactory(getCustomCellFactory("System"));
 		}
 	}
-	
-	private Callback<TableColumn<Map.Entry<String, String>, String>, TableCell<Map.Entry<String, String>, String>>getCustomCellFactory(final String font){
-		return new Callback<TableColumn<Map.Entry<String, String>, String>, TableCell<Map.Entry<String, String>, String>>(){
+
+	private Callback<TableColumn<Map.Entry<String, String>, String>, TableCell<Map.Entry<String, String>, String>> getCustomCellFactory(
+			final String font) {
+		return new Callback<TableColumn<Map.Entry<String, String>, String>, TableCell<Map.Entry<String, String>, String>>() {
 			@Override
-			public TableCell<Map.Entry<String, String>, String> call(TableColumn<Map.Entry<String, String>, String> param){
-				TableCell<Map.Entry<String, String>, String> cell = new TableCell<Map.Entry<String, String>, String>(){
+			public TableCell<Map.Entry<String, String>, String> call(
+					TableColumn<Map.Entry<String, String>, String> param) {
+				TableCell<Map.Entry<String, String>, String> cell = new TableCell<Map.Entry<String, String>, String>() {
 					@Override
-					public void updateItem(final String item, boolean empty){
-						if(item != null){
+					public void updateItem(final String item, boolean empty) {
+						if (item != null) {
 							setText(item);
 							setStyle("-fx-font-family: " + font + ";");
 						}

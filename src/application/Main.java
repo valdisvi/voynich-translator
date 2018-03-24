@@ -1,7 +1,6 @@
 package application;
 
 import javafx.application.Application;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,19 +10,21 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	public static final String dataFolder = "VoynichData";
+
 	@Override
-	public void start(Stage primaryStage) throws Exception{
+	public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/application/application.fxml"));
-		Font.loadFont( Main.class.getResource("voynich.ttf").toExternalForm(), 10 );
+		Parent root = FXMLLoader.load(getClass().getResource("/application/application.fxml"));
+		Font.loadFont(Main.class.getResource("voynich.ttf").toExternalForm(), 10);
 
-		primaryStage.setMinWidth(680);        
-	    primaryStage.setMinHeight(420);
-	    
-	    primaryStage.getIcons().add(new Image("pic/Logo.png"));
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setTitle("Voynich Transliterator");
-        primaryStage.show();
+		primaryStage.setMinWidth(680);
+		primaryStage.setMinHeight(420);
+
+		primaryStage.getIcons().add(new Image("pic/Logo.png"));
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setTitle("Voynich Transliterator");
+		primaryStage.show();
 
 	}
 

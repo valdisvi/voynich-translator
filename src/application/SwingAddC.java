@@ -5,22 +5,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Optional;
 
-import javax.swing.*;
-
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 public class SwingAddC {
 
 	SwingController t = new SwingController();
+	final String dataFolder = Main.dataFolder;
 
 	// loads rules into Text
 	// TODO need to show from the top not bottom of rules.
@@ -28,7 +22,7 @@ public class SwingAddC {
 		Throwable throwable = null;
 		Object var2_3 = null;
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("VoynichData/" + name));
+			BufferedReader br = new BufferedReader(new FileReader(dataFolder + "/" + name));
 			try {
 				StringBuilder sb = new StringBuilder();
 				String line = br.readLine();
@@ -54,7 +48,7 @@ public class SwingAddC {
 	}
 
 	public void addTable(String name, JTextArea rules) {
-		boolean checkFile = new File("VoynichData/", name + ".properties").exists();
+		boolean checkFile = new File(dataFolder, name + ".properties").exists();
 		if (name.equals("")) {
 			JOptionPane.showMessageDialog(null, "Name cannot be empty." + "\nPlease fill out the name form.", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -71,12 +65,12 @@ public class SwingAddC {
 			int check = (Integer) JOptionPane.showOptionDialog(null, "Do you want to overwrite table " + name + "?",
 					"Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if (check == JOptionPane.YES_OPTION) {
-			writeToFile(name, rules);
-					//  check for successful/ unsuccessful file removal
-					JOptionPane.showMessageDialog(null, "Table " + name + " overwritten", "Success!",
-							JOptionPane.INFORMATION_MESSAGE);}
-		}
-		else {
+				writeToFile(name, rules);
+				// check for successful/ unsuccessful file removal
+				JOptionPane.showMessageDialog(null, "Table " + name + " overwritten", "Success!",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		} else {
 			writeToFile(name, rules);
 			JOptionPane.showMessageDialog(null, "Table succesfully created", "Success!",
 					JOptionPane.INFORMATION_MESSAGE);
@@ -86,11 +80,7 @@ public class SwingAddC {
 
 	public void writeToFile(String name, JTextArea rules) {
 
-		File file = new File("VoynichData/" + name + ".properties");
-		FileWriter writer;
-		try {
-			writer = new FileWriter(file, false);
-			
+		try (FileWriter writer = new FileWriter(new File(dataFolder + "/" + name + ".properties"), false)) {
 			PrintWriter printer = new PrintWriter(writer);
 			printer.append(rules.getText());
 			printer.close();
@@ -98,7 +88,8 @@ public class SwingAddC {
 			rules.setText(null);
 
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Something went wrong.\n Please try again" ,"Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Something went wrong.\n Please try again", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
