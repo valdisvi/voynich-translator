@@ -36,12 +36,12 @@ public class SwingController {
 		// VoynichData - folder containing .properties files with
 		// transliteration tables
 		File[] allProperties = this.finder(Main.dataFolder);
-		InputStream Currier = this.getClass().getResourceAsStream("/data/Currier.properties");
-		InputStream FSG = this.getClass().getResourceAsStream("/data/FSG.properties");
-		InputStream Bennett_to_FSG = this.getClass().getResourceAsStream("/data/Bennett_to_FSG.properties");
-		InputStream Bennett = this.getClass().getResourceAsStream("/data/Bennett.properties");
+		InputStream Currier = this.getClass().getResourceAsStream(Main.dataFolder + "/Currier.properties");
+		InputStream FSG = this.getClass().getResourceAsStream(Main.dataFolder + "/FSG.properties");
+		InputStream Bennett_to_FSG = this.getClass().getResourceAsStream(Main.dataFolder + "/Bennett_to_FSG.properties");
+		InputStream Bennett = this.getClass().getResourceAsStream(Main.dataFolder + "/Bennett.properties");
 		InputStream BasicEVA_to_ASCIIsounds = this.getClass()
-				.getResourceAsStream("/data/BasicEVA_to_ASCIIsounds.properties");
+				.getResourceAsStream(Main.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
 
 		// if there are no files, create some.
 		if (allProperties == null) {
@@ -54,7 +54,7 @@ public class SwingController {
 				sb.append(System.lineSeparator());
 				line = Currierbr.readLine();
 			}
-			File file = new File("VoynichData/Currier.properties");
+			File file = new File(Main.dataFolder + "/Currier.properties");
 			FileWriter writer = new FileWriter(file, false);
 			PrintWriter printer = new PrintWriter(writer);
 			printer.append(sb.toString());
@@ -67,7 +67,7 @@ public class SwingController {
 				sb2.append(System.lineSeparator());
 				line2 = FSGbr.readLine();
 			}
-			File file2 = new File("VoynichData/FSG.properties");
+			File file2 = new File(Main.dataFolder + "/FSG.properties");
 			FileWriter writer2 = new FileWriter(file2, false);
 			PrintWriter printer2 = new PrintWriter(writer2);
 			printer2.append(sb2.toString());
@@ -80,7 +80,7 @@ public class SwingController {
 				sb3.append(System.lineSeparator());
 				line3 = Bennett_to_FSGbr.readLine();
 			}
-			File file3 = new File("VoynichData/Bennett_to_FSG.properties");
+			File file3 = new File(Main.dataFolder + "/Bennett_to_FSG.properties");
 			FileWriter writer3 = new FileWriter(file3, false);
 			PrintWriter printer3 = new PrintWriter(writer3);
 			printer3.append(sb3.toString());
@@ -93,7 +93,7 @@ public class SwingController {
 				sb4.append(System.lineSeparator());
 				line4 = Bennettbr.readLine();
 			}
-			File file4 = new File("VoynichData/Bennett.properties");
+			File file4 = new File(Main.dataFolder + "/Bennett.properties");
 			FileWriter writer4 = new FileWriter(file4, false);
 			PrintWriter printer4 = new PrintWriter(writer4);
 			printer4.append(sb4.toString());
@@ -107,7 +107,7 @@ public class SwingController {
 				sb5.append(System.lineSeparator());
 				line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
 			}
-			File file5 = new File("VoynichData/BasicEVA_to_ASCIIsounds.properties");
+			File file5 = new File(Main.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
 			FileWriter writer5 = new FileWriter(file5, false);
 			PrintWriter printer5 = new PrintWriter(writer5);
 			printer5.append(sb5.toString());

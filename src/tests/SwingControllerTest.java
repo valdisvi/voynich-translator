@@ -41,13 +41,13 @@ public class SwingControllerTest {
 		try {
 			te.dataCreate();
 			assertNotNull("Directory VoynichData was not created", te.finder(Main.dataFolder));
-			assertTrue("File Currier.properties was not created", new File("VoynichData/Currier.properties").isFile());
-			assertTrue("File FSG.properties was not created", new File("VoynichData/FSG.properties").isFile());
+			assertTrue("File Currier.properties was not created", new File(Main.dataFolder + "/Currier.properties").isFile());
+			assertTrue("File FSG.properties was not created", new File(Main.dataFolder + "/FSG.properties").isFile());
 			assertTrue("File Bennett_to_FSG.properties was not created",
-					new File("VoynichData/Bennett_to_FSG.properties").isFile());
-			assertTrue("File Bennett.properties was not created", new File("VoynichData/Bennett.properties").isFile());
+					new File(Main.dataFolder + "/Bennett_to_FSG.properties").isFile());
+			assertTrue("File Bennett.properties was not created", new File(Main.dataFolder + "/Bennett.properties").isFile());
 			assertTrue("File BasicEVA_to_ASCIIsounds.properties was not created",
-					new File("VoynichData/BasicEVA_to_ASCIIsounds.properties").isFile());
+					new File(Main.dataFolder + "/BasicEVA_to_ASCIIsounds.properties").isFile());
 			assertFalse("Voynich Data can not be file", new File(Main.dataFolder).isFile());
 		} catch (Exception e) {
 
@@ -61,7 +61,7 @@ public class SwingControllerTest {
 		String dummy2= "voynichdata";
 		assertNull("None existing directory was found", te.finder(dummy));
 		assertNull("voynichdata was found instead of VoynichData", te.finder(dummy2));
-		assertNotNull("VoynichData was not found", te.finder(Main.dataFolder));
+		assertNotNull(Main.dataFolder + " was not found", te.finder(Main.dataFolder));
 	}
 
 	@Test
@@ -96,7 +96,7 @@ public class SwingControllerTest {
 
 	@Test
 	public void testTransliterate() {
-		String path = "VoynichData/FSG.properties";
+		String path = Main.dataFolder + "/FSG.properties";
 		String textIn = "Reasonable appearance companions oh by remarkably me invitation understood. Pursuit elderly ask perhaps all. 246346 &&#222!!)";
 		String textOut = "ReAsONAble AKKeArANCe COMKANIONs OD b2 reMArHAbl2 Me INvItAtION FNderstOOd. IKFrsFIt elderl2 AsH KerDAKs All. S4E34E (7)(7)#SSS!!)";
 		try {

@@ -41,7 +41,7 @@ public class SwingAddCTest {
 		assertEquals("Expected empty text pane if selected file is empty", "", efer.getText());
 		File fileContent = new File(Main.dataFolder + "/" + "Bennett" + ".properties");
 		t.selectTable("Bennett.properties", efer);
-		assertEquals("Selected tables contents does not mach text are", this.readFile("VoynichData/Bennett.properties"),
+		assertEquals("Selected tables contents does not mach text are", this.readFile(Main.dataFolder + "/Bennett.properties"),
 				efer.getText());
 	}
 
