@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 public class SwingAddC {
 
 	SwingController t = new SwingController();
-	final String dataFolder = Main.dataFolder;
+	final String dataFolder = SwingApp.dataFolder;
 
 	// loads rules into Text
 	// TODO need to show from the top not bottom of rules.

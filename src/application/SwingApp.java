@@ -37,6 +37,7 @@ public class SwingApp {
 	String author;
 	private JTable tableTrans;
 	public static Object a;
+	public static String dataFolder = "VoynichData";
 
 	/**
 	 * Launch the application.

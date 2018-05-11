@@ -35,17 +35,17 @@ public class SwingController {
 	public void dataCreate() throws IOException {
 		// VoynichData - folder containing .properties files with
 		// transliteration tables
-		File[] allProperties = this.finder(Main.dataFolder);
-		InputStream Currier = this.getClass().getResourceAsStream(Main.dataFolder + "/Currier.properties");
-		InputStream FSG = this.getClass().getResourceAsStream(Main.dataFolder + "/FSG.properties");
-		InputStream Bennett_to_FSG = this.getClass().getResourceAsStream(Main.dataFolder + "/Bennett_to_FSG.properties");
-		InputStream Bennett = this.getClass().getResourceAsStream(Main.dataFolder + "/Bennett.properties");
+		File[] allProperties = this.finder(SwingApp.dataFolder);
+		InputStream Currier = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/Currier.properties");
+		InputStream FSG = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/FSG.properties");
+		InputStream Bennett_to_FSG = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/Bennett_to_FSG.properties");
+		InputStream Bennett = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/Bennett.properties");
 		InputStream BasicEVA_to_ASCIIsounds = this.getClass()
-				.getResourceAsStream(Main.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
+				.getResourceAsStream(SwingApp.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
 
 		// if there are no files, create some.
 		if (allProperties == null) {
-			new File(Main.dataFolder).mkdirs();
+			new File(SwingApp.dataFolder).mkdirs();
 			BufferedReader Currierbr = new BufferedReader(new InputStreamReader(Currier));
 			StringBuilder sb = new StringBuilder();
 			String line = Currierbr.readLine();
@@ -54,7 +54,7 @@ public class SwingController {
 				sb.append(System.lineSeparator());
 				line = Currierbr.readLine();
 			}
-			File file = new File(Main.dataFolder + "/Currier.properties");
+			File file = new File(SwingApp.dataFolder + "/Currier.properties");
 			FileWriter writer = new FileWriter(file, false);
 			PrintWriter printer = new PrintWriter(writer);
 			printer.append(sb.toString());
@@ -67,7 +67,7 @@ public class SwingController {
 				sb2.append(System.lineSeparator());
 				line2 = FSGbr.readLine();
 			}
-			File file2 = new File(Main.dataFolder + "/FSG.properties");
+			File file2 = new File(SwingApp.dataFolder + "/FSG.properties");
 			FileWriter writer2 = new FileWriter(file2, false);
 			PrintWriter printer2 = new PrintWriter(writer2);
 			printer2.append(sb2.toString());
@@ -80,7 +80,7 @@ public class SwingController {
 				sb3.append(System.lineSeparator());
 				line3 = Bennett_to_FSGbr.readLine();
 			}
-			File file3 = new File(Main.dataFolder + "/Bennett_to_FSG.properties");
+			File file3 = new File(SwingApp.dataFolder + "/Bennett_to_FSG.properties");
 			FileWriter writer3 = new FileWriter(file3, false);
 			PrintWriter printer3 = new PrintWriter(writer3);
 			printer3.append(sb3.toString());
@@ -93,7 +93,7 @@ public class SwingController {
 				sb4.append(System.lineSeparator());
 				line4 = Bennettbr.readLine();
 			}
-			File file4 = new File(Main.dataFolder + "/Bennett.properties");
+			File file4 = new File(SwingApp.dataFolder + "/Bennett.properties");
 			FileWriter writer4 = new FileWriter(file4, false);
 			PrintWriter printer4 = new PrintWriter(writer4);
 			printer4.append(sb4.toString());
@@ -107,7 +107,7 @@ public class SwingController {
 				sb5.append(System.lineSeparator());
 				line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
 			}
-			File file5 = new File(Main.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
+			File file5 = new File(SwingApp.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
 			FileWriter writer5 = new FileWriter(file5, false);
 			PrintWriter printer5 = new PrintWriter(writer5);
 			printer5.append(sb5.toString());
@@ -128,7 +128,7 @@ public class SwingController {
 	public void deleteTable(String name) {
 		try {
 
-			File file = new File(Main.dataFolder + "/" + name);
+			File file = new File(SwingApp.dataFolder + "/" + name);
 			Path p = file.toPath();
 			if (name.equals("Currier.properties") || name.equals("BasicEVA_to_ASCIIsounds.properties")
 					|| name.equals("Bennett_to_FSG.properties") || name.equals("Bennett.properties")
@@ -164,7 +164,7 @@ public class SwingController {
 
 	public void setBoxContents(JComboBox box) throws IOException {
 		box.removeAllItems();
-		File[] allProperties = this.finder(Main.dataFolder);
+		File[] allProperties = this.finder(SwingApp.dataFolder);
 		File[] arrfile = allProperties;
 		int n = arrfile.length;
 		int n2 = 0;
@@ -314,7 +314,7 @@ public class SwingController {
 	}
 
 	public void transliterate(JComboBox box, JTextPane in, JTextPane out) throws IOException, InterruptedException {
-		String path = Main.dataFolder + "/" + box.getSelectedItem().toString();
+		String path = SwingApp.dataFolder + "/" + box.getSelectedItem().toString();
 		TransliterationProcess tp = new TransliterationProcess(path, "Currier");
 		out.setText(tp.transliterate(in.getText()));
 	}

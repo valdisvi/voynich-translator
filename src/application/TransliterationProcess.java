@@ -8,14 +8,12 @@ public class TransliterationProcess {
 
 	private String transliterationFilePath;
 	private String transliterationFileName;
-	private int index;
 	private LinkedHashMap<String, String> rulesList;
 
 	public TransliterationProcess(String path, String fileName) throws IOException {
 
 		this.transliterationFilePath = path;
 		this.transliterationFileName = fileName;
-		this.index = 0;
 		this.rulesList = this.getRules();
 	}
 
@@ -78,9 +76,6 @@ public class TransliterationProcess {
 		return false;
 	}
 
-	public String getPath() {
-		return Controller.path2;
-	}
 
 	public String getName() {
 		// TODO get name from path

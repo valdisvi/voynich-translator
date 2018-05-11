@@ -14,8 +14,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.Main;
 import application.SwingAddC;
+import application.SwingApp;
 
 public class SwingAddCTest {
 	SwingAddC t;
@@ -35,20 +35,20 @@ public class SwingAddCTest {
 	@Test
 	public void testSelectTable() throws Exception {
 		String testName = "testerEmpty";
-		File testFile = new File(Main.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(SwingApp.dataFolder + "/" + testName + ".properties");
 		JTextArea efer = new JTextArea();
 		t.selectTable(testName, efer);
 		assertEquals("Expected empty text pane if selected file is empty", "", efer.getText());
-		File fileContent = new File(Main.dataFolder + "/" + "Bennett" + ".properties");
+		File fileContent = new File(SwingApp.dataFolder + "/" + "Bennett" + ".properties");
 		t.selectTable("Bennett.properties", efer);
-		assertEquals("Selected tables contents does not mach text are", this.readFile(Main.dataFolder + "/Bennett.properties"),
+		assertEquals("Selected tables contents does not mach text are", this.readFile(SwingApp.dataFolder + "/Bennett.properties"),
 				efer.getText());
 	}
 
 	@Test
 	public void testAddTable() {
 		String testName = "thisIsATest";
-		File testFile = new File(Main.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(SwingApp.dataFolder + "/" + testName + ".properties");
 		JTextArea ruleTest = new JTextArea();
 		ruleTest.setText("test=tset");
 		t.addTable(testName, ruleTest);
@@ -61,7 +61,7 @@ public class SwingAddCTest {
 	@Test
 	public void testWriteToFile() {
 		String testName = "thisIsATest";
-		File testFile = new File(Main.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(SwingApp.dataFolder + "/" + testName + ".properties");
 		JTextArea ruleTest = new JTextArea();
 		ruleTest.setText("test=tset");
 		t.writeToFile(testName, ruleTest);
