@@ -36,9 +36,12 @@ public class SwingController {
 		// VoynichData - folder containing .properties files with
 		// transliteration tables
 		File[] allProperties = this.finder(SwingApp.dataFolder);
+		File test = new File(SwingApp.dataFolder + "/Currier.properties");
+		System.out.println(test.getAbsolutePath() + " " + test.canWrite());
 		InputStream Currier = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/Currier.properties");
 		InputStream FSG = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/FSG.properties");
-		InputStream Bennett_to_FSG = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/Bennett_to_FSG.properties");
+		InputStream Bennett_to_FSG = this.getClass()
+				.getResourceAsStream(SwingApp.dataFolder + "/Bennett_to_FSG.properties");
 		InputStream Bennett = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/Bennett.properties");
 		InputStream BasicEVA_to_ASCIIsounds = this.getClass()
 				.getResourceAsStream(SwingApp.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
