@@ -42,89 +42,31 @@ public class MainController {
 	));
 
 	public void dataCreate() {
-		try {
-			// VoynichData - folder containing .properties files with
-			// transliteration tables
-			File[] allProperties = this.finder(MainFrame.dataFolder);
-			File test = new File(MainFrame.dataFolder + "/Currier.properties");
-			System.out.println(test.getAbsolutePath() + " " + test.canWrite());
-			InputStream Currier = this.getClass().getResourceAsStream(MainFrame.dataFolder + "/Currier.properties");
-			InputStream FSG = this.getClass().getResourceAsStream(MainFrame.dataFolder + "/FSG.properties");
-			InputStream Bennett_to_FSG = this.getClass()
-					.getResourceAsStream(MainFrame.dataFolder + "/Bennett_to_FSG.properties");
-			InputStream Bennett = this.getClass().getResourceAsStream(MainFrame.dataFolder + "/Bennett.properties");
-			InputStream BasicEVA_to_ASCIIsounds = this.getClass()
-					.getResourceAsStream(MainFrame.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
+		// VoynichData - folder containing .properties files with
+		// transliteration tables
+		for (String item : defaultTables)
+			makePropertyFile(item);
+	}
 
-			// if there are no files, create some.
-			if (allProperties == null) {
+	private void makePropertyFile(String propFileName) {
+		try {
+			InputStream stream = this.getClass().getResourceAsStream("/" + propFileName);
+			if (stream != null) {
+				System.out.println("makePropertyFile: " + propFileName);
 				new File(MainFrame.dataFolder).mkdirs();
-				BufferedReader Currierbr = new BufferedReader(new InputStreamReader(Currier));
+				BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 				StringBuilder sb = new StringBuilder();
-				String line = Currierbr.readLine();
+				String line = reader.readLine();
 				while (line != null) {
 					sb.append(line);
 					sb.append(System.lineSeparator());
-					line = Currierbr.readLine();
+					line = reader.readLine();
 				}
-				File file = new File(MainFrame.dataFolder + "/Currier.properties");
+				File file = new File(MainFrame.dataFolder + "/" + propFileName);
 				FileWriter writer = new FileWriter(file, false);
 				PrintWriter printer = new PrintWriter(writer);
 				printer.append(sb.toString());
 				printer.close();
-				BufferedReader FSGbr = new BufferedReader(new InputStreamReader(FSG));
-				StringBuilder sb2 = new StringBuilder();
-				String line2 = FSGbr.readLine();
-				while (line2 != null) {
-					sb2.append(line2);
-					sb2.append(System.lineSeparator());
-					line2 = FSGbr.readLine();
-				}
-				File file2 = new File(MainFrame.dataFolder + "/FSG.properties");
-				FileWriter writer2 = new FileWriter(file2, false);
-				PrintWriter printer2 = new PrintWriter(writer2);
-				printer2.append(sb2.toString());
-				printer2.close();
-				BufferedReader Bennett_to_FSGbr = new BufferedReader(new InputStreamReader(Bennett_to_FSG));
-				StringBuilder sb3 = new StringBuilder();
-				String line3 = Bennett_to_FSGbr.readLine();
-				while (line3 != null) {
-					sb3.append(line3);
-					sb3.append(System.lineSeparator());
-					line3 = Bennett_to_FSGbr.readLine();
-				}
-				File file3 = new File(MainFrame.dataFolder + "/Bennett_to_FSG.properties");
-				FileWriter writer3 = new FileWriter(file3, false);
-				PrintWriter printer3 = new PrintWriter(writer3);
-				printer3.append(sb3.toString());
-				printer3.close();
-				BufferedReader Bennettbr = new BufferedReader(new InputStreamReader(Bennett));
-				StringBuilder sb4 = new StringBuilder();
-				String line4 = Bennettbr.readLine();
-				while (line4 != null) {
-					sb4.append(line4);
-					sb4.append(System.lineSeparator());
-					line4 = Bennettbr.readLine();
-				}
-				File file4 = new File(MainFrame.dataFolder + "/Bennett.properties");
-				FileWriter writer4 = new FileWriter(file4, false);
-				PrintWriter printer4 = new PrintWriter(writer4);
-				printer4.append(sb4.toString());
-				printer4.close();
-				BufferedReader BasicEVA_to_ASCIIsoundsbr = new BufferedReader(
-						new InputStreamReader(BasicEVA_to_ASCIIsounds));
-				StringBuilder sb5 = new StringBuilder();
-				String line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
-				while (line5 != null) {
-					sb5.append(line5);
-					sb5.append(System.lineSeparator());
-					line5 = BasicEVA_to_ASCIIsoundsbr.readLine();
-				}
-				File file5 = new File(MainFrame.dataFolder + "/BasicEVA_to_ASCIIsounds.properties");
-				FileWriter writer5 = new FileWriter(file5, false);
-				PrintWriter printer5 = new PrintWriter(writer5);
-				printer5.append(sb5.toString());
-				printer5.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
