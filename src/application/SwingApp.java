@@ -17,6 +17,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,11 +30,15 @@ import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.JScrollBar;
+import java.awt.Rectangle;
+import java.awt.FlowLayout;
 
 public class SwingApp {
 
 	private JFrame mainFrame;
-	private SwingController t;
+	static SwingController t;
+	static JComboBox transTables;
 	String author;
 	private JTable tableTrans;
 	public static Object a;
@@ -151,10 +156,10 @@ public class SwingApp {
 			}
 		});
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setToolTipText("Choose table from list");
+		transTables = new JComboBox();
+		transTables.setToolTipText("Choose table from list");
 		// loads comboBox values
-		t.setBoxContents(comboBox);
+		t.setBoxContents(transTables);
 
 		SwingTableModel modelView = new SwingTableModel();
 		tableTrans = new JTable(modelView);
@@ -165,11 +170,11 @@ public class SwingApp {
 		btnDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Object a = comboBox.getSelectedItem();
-				String b = a.toString();
+				Object item = transTables.getSelectedItem();
+				String b = item.toString();
 				t.deleteTable(b);
 				try {
-					t.setBoxContents(comboBox);
+					t.setBoxContents(transTables);
 					// check why this throw is necessary and the response we
 					// need for this.
 				} catch (IOException e1) {
@@ -189,31 +194,18 @@ public class SwingApp {
 			}
 		});
 
-		comboBox.addItemListener(new ItemListener() {
+		transTables.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				// checks for change in selected item that is not caused by
 				// reloading
 				// and refreshes table according to selection
-				if (comboBox.getItemCount() != 0) {
-					a = comboBox.getSelectedItem();
+				if (transTables.getItemCount() != 0) {
+					a = transTables.getSelectedItem();
 					SwingTableModel model = new SwingTableModel();
 					tableTrans.setModel(model);
 				}
 			}
 		});
-
-		JButton refresh = new JButton("Refresh");
-		refresh.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				try {
-					t.setBoxContents(comboBox);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		refresh.setToolTipText("Refresh tables after adding");
 
 		JPanel textPane1 = new JPanel();
 		tabbedPane.addTab("Transliterate", null, textPane1, null);
@@ -240,7 +232,7 @@ public class SwingApp {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					txtpnText.setText("");
-					t.transliterate(comboBox, txtpnEnterTextHere, txtpnText);
+					t.transliterate(transTables, txtpnEnterTextHere, txtpnText);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -288,7 +280,7 @@ public class SwingApp {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					txtpnText.setText("");
-					t.transliterate(comboBox, textPaneW, txtpnText);
+					t.transliterate(transTables, textPaneW, txtpnText);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (InterruptedException e1) {
@@ -465,36 +457,58 @@ public class SwingApp {
 																.addComponent(pickV).addComponent(pickR)))))
 						.addContainerGap()));
 
-		JScrollPane scrollPane_3 = new JScrollPane();
+		JInternalFrame panel = new EditFrame(mainFrame, "VoynichData/FSG.properties");// "VoynichData/FSG.properties",
+																				// new
+		// JInternalFrame());
 		// panel for table
 		GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
-		gl_tablePanel.setHorizontalGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING).addGroup(gl_tablePanel
-				.createSequentialGroup()
-				.addGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_tablePanel.createSequentialGroup().addContainerGap()
-								.addGroup(gl_tablePanel.createParallelGroup(Alignment.TRAILING)
-										.addComponent(comboBox, Alignment.LEADING, 0, 295, Short.MAX_VALUE)
-										.addGroup(gl_tablePanel.createSequentialGroup().addComponent(btnAdd)
-												.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-												.addComponent(btnDelete).addGap(29).addComponent(refresh)))
-								.addGap(6))
-						.addGroup(gl_tablePanel.createSequentialGroup().addGap(75).addComponent(lblTable))
-						.addGroup(gl_tablePanel.createSequentialGroup().addContainerGap().addComponent(scrollPane_3,
-								GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)))
-				.addContainerGap()));
-		gl_tablePanel.setVerticalGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_tablePanel.createSequentialGroup().addComponent(lblTable).addGap(22)
-						.addGroup(gl_tablePanel.createParallelGroup(Alignment.BASELINE).addComponent(refresh)
-								.addComponent(btnAdd).addComponent(btnDelete))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE).addContainerGap()));
-		scrollPane_3.setViewportView(tableTrans);
+		gl_tablePanel.setHorizontalGroup(
+			gl_tablePanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_tablePanel.createSequentialGroup()
+					.addGap(75)
+					.addComponent(lblTable)
+					.addContainerGap(89, Short.MAX_VALUE))
+				.addGroup(gl_tablePanel.createSequentialGroup()
+					.addGap(16)
+					.addComponent(transTables, 0, 289, Short.MAX_VALUE)
+					.addGap(14))
+				.addGroup(gl_tablePanel.createSequentialGroup()
+					.addGap(17)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(17, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_tablePanel.createSequentialGroup()
+					.addGap(17)
+					.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+					.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+					.addGap(15))
+		);
+		gl_tablePanel.setVerticalGroup(
+			gl_tablePanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_tablePanel.createSequentialGroup()
+					.addComponent(lblTable)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(transTables, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+					.addGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnDelete, Alignment.TRAILING)
+						.addComponent(btnAdd, Alignment.TRAILING))
+					.addGap(10)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 468, GroupLayout.PREFERRED_SIZE)
+					.addGap(8))
+		);
 		tablePanel.setLayout(gl_tablePanel);
 		webPanel.setLayout(gl_webPanel);
 
 		mainFrame.getContentPane().setLayout(groupLayout);
+	}
+
+	static void refresh() {
+		try {
+			t.setBoxContents(transTables);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

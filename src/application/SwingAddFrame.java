@@ -4,7 +4,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.GroupLayout;
@@ -14,7 +13,6 @@ import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -22,18 +20,17 @@ import javax.swing.WindowConstants;
 
 public class SwingAddFrame extends JFrame {
 
-	private JPanel contentPane;
+	private static final long serialVersionUID = -9173859688402398993L;
+	private SwingAddFrame thisFrame;
 
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
-	 */
+	private void closeFrame() {
+		thisFrame.setVisible(false); // hide
+		thisFrame.dispose(); // destroy
+	}
 
 	// constructor for the frame that gets created on add.
 	public SwingAddFrame() {
+		thisFrame = this;
 		SwingController t = new SwingController();
 		SwingAddC tc = new SwingAddC();
 		setBounds(450, 130, 400, 574);
@@ -56,14 +53,9 @@ public class SwingAddFrame extends JFrame {
 				String b = a.toString();
 				try {
 					tc.selectTable(b, ruleEditor);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-
 			}
 		});
 
@@ -80,8 +72,8 @@ public class SwingAddFrame extends JFrame {
 				String b = nameEditor.getText();
 				tc.addTable(b, ruleEditor);
 				nameEditor.setText("");
-				// problem of refreshing contents of combobox
-				// kinda solved by adding a "refresh" button.
+				SwingApp.refresh();
+				closeFrame();
 			}
 		});
 
