@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import application.MainFrame;
 
-public class SwingAppTest {
+public class MainFrameTest {
 	static MainFrame app;
 
 	@Before
