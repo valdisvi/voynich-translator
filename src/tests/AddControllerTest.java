@@ -41,8 +41,8 @@ public class AddControllerTest {
 		assertEquals("Expected empty text pane if selected file is empty", "", efer.getText());
 		File fileContent = new File(MainFrame.dataFolder + "/" + "Bennett" + ".properties");
 		t.selectTable("Bennett.properties", efer);
-		assertEquals("Selected tables contents does not mach text are", this.readFile(MainFrame.dataFolder + "/Bennett.properties"),
-				efer.getText());
+		assertEquals("Selected tables contents does not mach text are",
+				this.readFile(MainFrame.dataFolder + "/Bennett.properties"), efer.getText());
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class AddControllerTest {
 			content = new String(encoded, StandardCharsets.UTF_8);
 			content.replaceAll("\r|\n", "");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return content;
 	}

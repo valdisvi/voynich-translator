@@ -44,11 +44,8 @@ public class TransliterationProcess {
 				k = "\\.";
 				v = " ";
 			}
-
 			else if (k.equals("^"))
 				k = "\\^";
-
-			// System.out.println(inputText);
 
 			inputText = inputText.replaceAll(k, v);
 		}

@@ -41,11 +41,14 @@ public class MainControllerTest {
 		try {
 			te.dataCreate();
 			assertNotNull("Directory VoynichData was not created", te.finder(MainFrame.dataFolder));
-			assertTrue("File Currier.properties was not created", new File(MainFrame.dataFolder + "/Currier.properties").isFile());
-			assertTrue("File FSG.properties was not created", new File(MainFrame.dataFolder + "/FSG.properties").isFile());
+			assertTrue("File Currier.properties was not created",
+					new File(MainFrame.dataFolder + "/Currier.properties").isFile());
+			assertTrue("File FSG.properties was not created",
+					new File(MainFrame.dataFolder + "/FSG.properties").isFile());
 			assertTrue("File Bennett_to_FSG.properties was not created",
 					new File(MainFrame.dataFolder + "/Bennett_to_FSG.properties").isFile());
-			assertTrue("File Bennett.properties was not created", new File(MainFrame.dataFolder + "/Bennett.properties").isFile());
+			assertTrue("File Bennett.properties was not created",
+					new File(MainFrame.dataFolder + "/Bennett.properties").isFile());
 			assertTrue("File BasicEVA_to_ASCIIsounds.properties was not created",
 					new File(MainFrame.dataFolder + "/BasicEVA_to_ASCIIsounds.properties").isFile());
 			assertFalse("Voynich Data can not be file", new File(MainFrame.dataFolder).isFile());
@@ -58,7 +61,7 @@ public class MainControllerTest {
 	@Test
 	public void testFinder() {
 		String dummy = "ReAsONAble";
-		String dummy2= "voynichdata";
+		String dummy2 = "voynichdata";
 		assertNull("None existing directory was found", te.finder(dummy));
 		assertNull("voynichdata was found instead of VoynichData", te.finder(dummy2));
 		assertNotNull(MainFrame.dataFolder + " was not found", te.finder(MainFrame.dataFolder));
@@ -107,8 +110,7 @@ public class MainControllerTest {
 			assertNotEquals("Transliteration process retuned the same value", textIn, tp.transliterate(textIn));
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 	}

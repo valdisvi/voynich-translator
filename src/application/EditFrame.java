@@ -38,7 +38,6 @@ public class EditFrame extends JInternalFrame {
 	}
 
 	public EditFrame(JFrame parentFrame, String fileName) {
-		System.out.println("EditFrame > fileName:" + fileName);
 		getContentPane().setPreferredSize(new Dimension(88, 488));
 		getContentPane().setMinimumSize(new Dimension(78, 57));
 		this.fileName = fileName;

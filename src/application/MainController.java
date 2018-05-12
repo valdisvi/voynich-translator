@@ -52,7 +52,6 @@ public class MainController {
 		try {
 			InputStream stream = this.getClass().getResourceAsStream("/" + propFileName);
 			if (stream != null) {
-				System.out.println("makePropertyFile: " + propFileName);
 				new File(MainFrame.dataFolder).mkdirs();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 				StringBuilder sb = new StringBuilder();
