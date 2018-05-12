@@ -161,12 +161,10 @@ public class MainFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String itemName = transTables.getSelectedItem().toString();
-				controller.deleteTable(itemName);
-
+				controller.deleteTable(itemName + ".properties");
 				controller.setBoxContents(transTables);
 				// check why this throw is necessary and the response we
 				// need for this.
-
 			}
 		});
 		JTextPane txtpnEnterTextHere = new JTextPane();
