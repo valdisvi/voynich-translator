@@ -18,10 +18,10 @@ import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.WindowConstants;
 
-public class SwingAddFrame extends JFrame {
+public class AddFrame extends JFrame {
 
 	private static final long serialVersionUID = -9173859688402398993L;
-	private SwingAddFrame thisFrame;
+	private AddFrame thisFrame;
 
 	private void closeFrame() {
 		thisFrame.setVisible(false); // hide
@@ -29,7 +29,7 @@ public class SwingAddFrame extends JFrame {
 	}
 
 	// constructor for the frame that gets created on add.
-	public SwingAddFrame() {
+	public AddFrame() {
 		thisFrame = this;
 		SwingController t = new SwingController();
 		AddController tc = new AddController();

@@ -146,7 +146,7 @@ public class SwingApp {
 			public void mouseClicked(MouseEvent arg0) {
 				// calls for creation of an add frame
 				@SuppressWarnings("unused")
-				JFrame addFrame = new SwingAddFrame();
+				JFrame addFrame = new AddFrame();
 			}
 		});
 
