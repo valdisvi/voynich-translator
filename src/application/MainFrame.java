@@ -30,7 +30,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
 
-public class SwingApp {
+public class MainFrame {
 
 	private JFrame mainFrame;
 	static SwingController controller;
@@ -54,7 +54,7 @@ public class SwingApp {
 			@Override
 			public void run() {
 				try {
-					SwingApp window = new SwingApp();
+					MainFrame window = new MainFrame();
 					window.mainFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +63,7 @@ public class SwingApp {
 		});
 	}
 
-	public SwingApp() throws IOException {
+	public MainFrame() throws IOException {
 		controller = new SwingController();
 		controller.dataCreate();
 		initialize();
@@ -185,7 +185,7 @@ public class SwingApp {
 				// refresh table according to selection
 				if (transTables.getItemCount() != 0) {
 					currentTableName = transTables.getSelectedItem().toString();
-					editFrame.updateFrame(SwingApp.dataFolder + "/" + currentTableName);
+					editFrame.updateFrame(MainFrame.dataFolder + "/" + currentTableName);
 				}
 			}
 		});
@@ -422,7 +422,7 @@ public class SwingApp {
 																.addComponent(pickV).addComponent(pickR)))))
 						.addContainerGap()));
 
-		editFrame = new EditFrame(mainFrame, SwingApp.dataFolder + "/" + currentTableName);
+		editFrame = new EditFrame(mainFrame, MainFrame.dataFolder + "/" + currentTableName);
 		gl_tablePanel = new GroupLayout(tablePanel);
 		gl_tablePanel.setHorizontalGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tablePanel.createSequentialGroup().addGap(75).addComponent(lblTable).addContainerGap(89,

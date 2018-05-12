@@ -68,7 +68,7 @@ public class AddFrame extends JFrame {
 				String b = nameEditor.getText();
 				tc.addTable(b, ruleEditor);
 				nameEditor.setText("");
-				SwingApp.refresh();
+				MainFrame.refresh();
 				closeFrame();
 			}
 		});

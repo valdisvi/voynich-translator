@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import application.AddController;
-import application.SwingApp;
+import application.MainFrame;
 import application.SwingController;
 import application.TransliterationProcess;
 
@@ -40,15 +40,15 @@ public class SwingControllerTest {
 	public void testDataCreate() {
 		try {
 			te.dataCreate();
-			assertNotNull("Directory VoynichData was not created", te.finder(SwingApp.dataFolder));
-			assertTrue("File Currier.properties was not created", new File(SwingApp.dataFolder + "/Currier.properties").isFile());
-			assertTrue("File FSG.properties was not created", new File(SwingApp.dataFolder + "/FSG.properties").isFile());
+			assertNotNull("Directory VoynichData was not created", te.finder(MainFrame.dataFolder));
+			assertTrue("File Currier.properties was not created", new File(MainFrame.dataFolder + "/Currier.properties").isFile());
+			assertTrue("File FSG.properties was not created", new File(MainFrame.dataFolder + "/FSG.properties").isFile());
 			assertTrue("File Bennett_to_FSG.properties was not created",
-					new File(SwingApp.dataFolder + "/Bennett_to_FSG.properties").isFile());
-			assertTrue("File Bennett.properties was not created", new File(SwingApp.dataFolder + "/Bennett.properties").isFile());
+					new File(MainFrame.dataFolder + "/Bennett_to_FSG.properties").isFile());
+			assertTrue("File Bennett.properties was not created", new File(MainFrame.dataFolder + "/Bennett.properties").isFile());
 			assertTrue("File BasicEVA_to_ASCIIsounds.properties was not created",
-					new File(SwingApp.dataFolder + "/BasicEVA_to_ASCIIsounds.properties").isFile());
-			assertFalse("Voynich Data can not be file", new File(SwingApp.dataFolder).isFile());
+					new File(MainFrame.dataFolder + "/BasicEVA_to_ASCIIsounds.properties").isFile());
+			assertFalse("Voynich Data can not be file", new File(MainFrame.dataFolder).isFile());
 		} catch (Exception e) {
 
 		}
@@ -61,21 +61,21 @@ public class SwingControllerTest {
 		String dummy2= "voynichdata";
 		assertNull("None existing directory was found", te.finder(dummy));
 		assertNull("voynichdata was found instead of VoynichData", te.finder(dummy2));
-		assertNotNull(SwingApp.dataFolder + " was not found", te.finder(SwingApp.dataFolder));
+		assertNotNull(MainFrame.dataFolder + " was not found", te.finder(MainFrame.dataFolder));
 	}
 
 	@Test
 	public void testDeleteTable() {
 		String testName = "testinABC";
 		// JTextArea ruleTest= new JTextArea();
-		File testFile = new File(SwingApp.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(MainFrame.dataFolder + "/" + testName + ".properties");
 		JTextArea ruleTest = new JTextArea("rules");
 		t.writeToFile(testName, ruleTest);
 
 		te.deleteTable(testName + ".properties");
 		assertFalse("Table was not deleted", testFile.exists());
 		String wontName = "FSG.properties";
-		File wontFile = new File(SwingApp.dataFolder + "/" + wontName);
+		File wontFile = new File(MainFrame.dataFolder + "/" + wontName);
 		te.deleteTable(wontName);
 		assertTrue("Table was no deleted", wontFile.exists());
 
@@ -96,7 +96,7 @@ public class SwingControllerTest {
 
 	@Test
 	public void testTransliterate() {
-		String path = SwingApp.dataFolder + "/FSG.properties";
+		String path = MainFrame.dataFolder + "/FSG.properties";
 		String textIn = "Reasonable appearance companions oh by remarkably me invitation understood. Pursuit elderly ask perhaps all. 246346 &&#222!!)";
 		String textOut = "ReAsONAble AKKeArANCe COMKANIONs OD b2 reMArHAbl2 Me INvItAtION FNderstOOd. IKFrsFIt elderl2 AsH KerDAKs All. S4E34E (7)(7)#SSS!!)";
 		try {
