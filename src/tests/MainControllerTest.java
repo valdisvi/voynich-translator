@@ -22,7 +22,7 @@ import application.MainFrame;
 import application.MainController;
 import application.TransliterationProcess;
 
-public class SwingControllerTest {
+public class MainControllerTest {
 	MainController te;
 	AddController t;
 
