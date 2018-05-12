@@ -23,23 +23,17 @@ public class AddController {
 		Object var2_3 = null;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(dataFolder + "/" + name));
-			try {
-				StringBuilder sb = new StringBuilder();
-				String line = br.readLine();
-				while (line != null) {
-					sb.append(line);
-					sb.append(System.lineSeparator());
-					line = br.readLine();
-				}
-
-				ef.setText(sb.toString());
-			} finally {
-				if (br != null) {
-					br.close();
-				}
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+			while (line != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = br.readLine();
 			}
-		} catch (Throwable t) {
-			t.printStackTrace();
+			ef.setText(sb.toString());
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
