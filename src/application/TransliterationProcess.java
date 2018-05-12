@@ -43,8 +43,7 @@ public class TransliterationProcess {
 			else if (k.equals(".")) {
 				k = "\\.";
 				v = " ";
-			}
-			else if (k.equals("^"))
+			} else if (k.equals("^"))
 				k = "\\^";
 
 			inputText = inputText.replaceAll(k, v);
@@ -71,12 +70,5 @@ public class TransliterationProcess {
 			}
 		}
 		return false;
-	}
-
-
-	public String getName() {
-		// TODO get name from path
-		String path = "Currier";
-		return path;
 	}
 }

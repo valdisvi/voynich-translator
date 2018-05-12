@@ -35,11 +35,11 @@ public class AddControllerTest {
 	@Test
 	public void testSelectTable() throws Exception {
 		String testName = "testerEmpty";
-		File testFile = new File(MainFrame.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(MainFrame.dataFolder + "/" + testName);
 		JTextArea efer = new JTextArea();
 		t.selectTable(testName, efer);
 		assertEquals("Expected empty text pane if selected file is empty", "", efer.getText());
-		File fileContent = new File(MainFrame.dataFolder + "/" + "Bennett" + ".properties");
+		File fileContent = new File(MainFrame.dataFolder + "/" + "Bennett.properties");
 		t.selectTable("Bennett.properties", efer);
 		assertEquals("Selected tables contents does not mach text are",
 				this.readFile(MainFrame.dataFolder + "/Bennett.properties"), efer.getText());

@@ -38,12 +38,8 @@ public class AddController {
 					br.close();
 				}
 			}
-		} catch (Throwable throwable2) {
-			if (throwable == null) {
-				throwable = throwable2;
-			} else if (throwable != throwable2) {
-				throwable.addSuppressed(throwable2);
-			}
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
 	}
 

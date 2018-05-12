@@ -279,36 +279,4 @@ public class MainController {
 		out.setText(tp.transliterate(in.getText()));
 	}
 
-	public void setFont(JButton b, JTextPane text, JTable table) throws FontFormatException, IOException {
-		Font v = Font.createFont(Font.TRUETYPE_FONT,
-				getClass().getClassLoader().getResourceAsStream("application/voynich.ttf")).deriveFont(12f);
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
-				getClass().getClassLoader().getResourceAsStream("application/voynich.ttf")));
-		if (text.getFont().toString().contains("Dialog")) { // to Voynich
-			text.setFont(v);
-			@SuppressWarnings("serial")
-			DefaultTableCellRenderer toVoynich = new DefaultTableCellRenderer() {
-				Font font = v;
-
-				@Override
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-						boolean hasFocus, int row, int column) {
-					super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-					setFont(font);
-					return this;
-				}
-			};
-			table.getColumnModel().getColumn(0).setCellRenderer(toVoynich);
-			table.repaint();
-			b.setText("Latin");
-		} else { // to Latin
-			text.setFont(new Font("Dialog", Font.PLAIN, 12));
-			table.getColumnModel().getColumn(0).setCellRenderer(null);
-			table.setFont(new Font("Dialog", Font.PLAIN, 12));
-			table.repaint();
-			b.setText("Voynich");
-		}
-	}
-
 }
