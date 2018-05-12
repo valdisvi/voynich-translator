@@ -16,6 +16,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
@@ -31,6 +33,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class MainController {
 
 	static String authorURL = null;
+	static final ArrayList<String> defaultTables = new ArrayList<>(Arrays.asList( //
+			"BasicEVA_to_ASCIIsounds.properties", //
+			"Bennett.properties", //
+			"Bennett_to_FSG.properties", //
+			"Currier.properties", //
+			"FSG.properties"//
+	));
 
 	public void dataCreate() {
 		try {
