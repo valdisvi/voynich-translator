@@ -132,7 +132,7 @@ public class MainController {
 				PropertyManager pManager;
 				pManager = new PropertyManager(name, path);
 				Transliteration rules = pManager.getRules();
-				box.addItem(rules);
+				box.addItem(name.replace(".properties", ""));
 				++n2;
 			}
 		} catch (Exception e) {
@@ -274,8 +274,8 @@ public class MainController {
 		}
 	}
 
-	public void transliterate(JComboBox box, JTextPane in, JTextPane out) throws IOException, InterruptedException {
-		String path = MainFrame.dataFolder + "/" + box.getSelectedItem().toString();
+	public void transliterate(String fileName, JTextPane in, JTextPane out) throws IOException, InterruptedException {
+		String path = MainFrame.dataFolder + "/" + fileName;
 		TransliterationProcess tp = new TransliterationProcess(path, "Currier");
 		out.setText(tp.transliterate(in.getText()));
 	}

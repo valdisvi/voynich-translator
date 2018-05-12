@@ -185,7 +185,7 @@ public class MainFrame {
 				// refresh table according to selection
 				if (transTables.getItemCount() != 0) {
 					currentTableName = transTables.getSelectedItem().toString();
-					editFrame.updateFrame(MainFrame.dataFolder + "/" + currentTableName);
+					editFrame.updateFrame(MainFrame.dataFolder + "/" + currentTableName + ".properties");
 				}
 			}
 		});
@@ -199,7 +199,8 @@ public class MainFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					txtpnText.setText("");
-					controller.transliterate(transTables, txtpnEnterTextHere, txtpnText);
+					controller.transliterate(transTables.getSelectedItem().toString() + ".properties",
+							txtpnEnterTextHere, txtpnText);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -246,7 +247,8 @@ public class MainFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					txtpnText.setText("");
-					controller.transliterate(transTables, textPaneW, txtpnText);
+					controller.transliterate(transTables.getSelectedItem().toString() + ".properties", textPaneW,
+							txtpnText);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (InterruptedException e1) {

@@ -50,7 +50,7 @@ public class AddFrame extends JFrame {
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				Object a = comboBox.getSelectedItem();
-				String b = a.toString();
+				String b = a.toString() + ".properties";
 				try {
 					tc.selectTable(b, ruleEditor);
 				} catch (Exception e1) {
