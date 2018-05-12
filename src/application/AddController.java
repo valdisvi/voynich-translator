@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-public class SwingAddC {
+public class AddController {
 
 	SwingController controller = new SwingController();
 	final String dataFolder = SwingApp.dataFolder;

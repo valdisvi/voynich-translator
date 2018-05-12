@@ -32,7 +32,7 @@ public class SwingAddFrame extends JFrame {
 	public SwingAddFrame() {
 		thisFrame = this;
 		SwingController t = new SwingController();
-		SwingAddC tc = new SwingAddC();
+		AddController tc = new AddController();
 		setBounds(450, 130, 400, 574);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("Add table..");

@@ -17,19 +17,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.SwingAddC;
+import application.AddController;
 import application.SwingApp;
 import application.SwingController;
 import application.TransliterationProcess;
 
 public class SwingControllerTest {
 	SwingController te;
-	SwingAddC t;
+	AddController t;
 
 	@Before
 	public void setUp() throws Exception {
 		te = new SwingController();
-		t = new SwingAddC();
+		t = new AddController();
 	}
 
 	@After

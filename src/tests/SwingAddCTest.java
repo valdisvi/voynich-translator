@@ -14,16 +14,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.SwingAddC;
+import application.AddController;
 import application.SwingApp;
 
 public class SwingAddCTest {
-	SwingAddC t;
+	AddController t;
 
 	// SwingController tc;
 	@Before
 	public void setUp() throws Exception {
-		t = new SwingAddC();
+		t = new AddController();
 		// tc= new SwingController();
 	}
 
