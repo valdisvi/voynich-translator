@@ -20,9 +20,9 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class EditFrame extends JInternalFrame {
 	private static final long serialVersionUID = -5687409246419987970L;
-	static JFrame f;
-	private JTextArea textArea;
+	private static JFrame f;
 	private String fileName;
+	JTextArea textArea;
 
 	public static void main(String[] args) {
 		f = new JFrame("Application");
@@ -33,7 +33,9 @@ public class EditFrame extends JInternalFrame {
 		f.setVisible(true);
 	}
 
-	public EditFrame(JFrame f, String fileName) {
+	public EditFrame(JFrame parentFrame, String fileName) {
+		getContentPane().setPreferredSize(new Dimension(88, 488));
+		getContentPane().setMinimumSize(new Dimension(78, 57));
 		this.fileName = fileName;
 		BasicInternalFrameUI bi = (BasicInternalFrameUI) getUI();
 		bi.setNorthPane(null);
@@ -60,8 +62,8 @@ public class EditFrame extends JInternalFrame {
 		});
 		panel.add(saveButton, BorderLayout.WEST);
 		setVisible(true);
-		f.getContentPane().add(this);
-
+		parentFrame.getContentPane().add(this);
+		//revalidate();
 	}
 
 	private String fileRead(String file) {

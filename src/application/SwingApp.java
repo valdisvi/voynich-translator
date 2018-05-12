@@ -9,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -34,10 +35,16 @@ public class SwingApp {
 	private JFrame mainFrame;
 	static SwingController controller;
 	static JComboBox transTables;
+	static String currentTableName = "BasicEVA_to_ASCIIsounds.properties";
 	String author;
 	public static Object transTableObj;
 	public static String dataFolder = "VoynichData";
 	JInternalFrame editFrame;
+	JPanel tablePanel;
+	GroupLayout gl_tablePanel;
+	JButton btnAdd;
+	JButton btnDelete;
+	JLabel lblTable;
 
 	/**
 	 * Launch the application a.
@@ -67,7 +74,7 @@ public class SwingApp {
 	 * 
 	 * @throws IOException
 	 */
-	private void initialize() throws IOException {
+	private void initialize() {
 		controller = new SwingController();
 		mainFrame = new JFrame();
 		mainFrame.setBounds(100, 100, 1024, 620);
@@ -75,7 +82,7 @@ public class SwingApp {
 		mainFrame.setTitle("Voynich Translator");
 
 		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
-		JPanel tablePanel = new JPanel();
+		tablePanel = new JPanel();
 		JPanel translatedPanel = new JPanel();
 
 		JButton btnHelp = new JButton("Help");
@@ -129,10 +136,10 @@ public class SwingApp {
 		scrollPane_1.setViewportView(txtpnText);
 		translatedPanel.setLayout(gl_translatedPanel);
 
-		JLabel lblTable = new JLabel("Transliteration tables");
+		lblTable = new JLabel("Transliteration tables");
 		lblTable.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JButton btnAdd = new JButton("Add");
+		btnAdd = new JButton("Add");
 		btnAdd.setToolTipText("Add new table");
 		btnAdd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -148,20 +155,17 @@ public class SwingApp {
 		// loads comboBox values
 		controller.setBoxContents(transTables);
 
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
 		btnDelete.setToolTipText("Delete selected table");
 		btnDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String itemName = transTables.getSelectedItem().toString();
 				controller.deleteTable(itemName);
-				try {
-					controller.setBoxContents(transTables);
-					// check why this throw is necessary and the response we
-					// need for this.
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+
+				controller.setBoxContents(transTables);
+				// check why this throw is necessary and the response we
+				// need for this.
 
 			}
 		});
@@ -178,15 +182,18 @@ public class SwingApp {
 
 		transTables.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
+				System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()).replace(", ", "\n"));
 				// checks for change in selected item that is not caused by
 				// reloading
 				// and refreshes table according to selection
 				if (transTables.getItemCount() != 0) {
-					System.err.println(transTables.getSelectedItem());
-					editFrame = null;
-					editFrame = new EditFrame(mainFrame, SwingApp.dataFolder + "/" + transTables.getSelectedItem().toString());
+					currentTableName = transTables.getSelectedItem().toString();
+					System.err.println(currentTableName);
+					editFrame = new EditFrame(mainFrame, SwingApp.dataFolder + "/" + currentTableName);
 					// editFrame.revalidate();
-					editFrame.repaint();
+					// tablePanel.revalidate();
+					initialize();
+					System.err.println(currentTableName);
 				}
 			}
 		});
@@ -423,11 +430,8 @@ public class SwingApp {
 																.addComponent(pickV).addComponent(pickR)))))
 						.addContainerGap()));
 
-		editFrame = new EditFrame(mainFrame, "VoynichData/FSG.properties");// "VoynichData/FSG.properties",
-		// new
-		// JInternalFrame());
-		// panel for table
-		GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
+		editFrame = new EditFrame(mainFrame, SwingApp.dataFolder + "/" + currentTableName);
+		gl_tablePanel = new GroupLayout(tablePanel);
 		gl_tablePanel.setHorizontalGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tablePanel.createSequentialGroup().addGap(75).addComponent(lblTable).addContainerGap(89,
 						Short.MAX_VALUE))
@@ -459,11 +463,6 @@ public class SwingApp {
 	}
 
 	static void refresh() {
-		try {
-			controller.setBoxContents(transTables);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		controller.setBoxContents(transTables);
 	}
 }

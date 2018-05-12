@@ -36,7 +36,7 @@ public class SwingController {
 		// VoynichData - folder containing .properties files with
 		// transliteration tables
 		File[] allProperties = this.finder(SwingApp.dataFolder);
-		File test = new File (SwingApp.dataFolder + "/Currier.properties");
+		File test = new File(SwingApp.dataFolder + "/Currier.properties");
 		System.out.println(test.getAbsolutePath() + " " + test.canWrite());
 		InputStream Currier = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/Currier.properties");
 		InputStream FSG = this.getClass().getResourceAsStream(SwingApp.dataFolder + "/FSG.properties");
@@ -165,20 +165,25 @@ public class SwingController {
 
 	}
 
-	public void setBoxContents(JComboBox box) throws IOException {
-		box.removeAllItems();
-		File[] allProperties = this.finder(SwingApp.dataFolder);
-		File[] arrfile = allProperties;
-		int n = arrfile.length;
-		int n2 = 0;
-		while (n2 < n) {
-			File properties = arrfile[n2];
-			String path = properties.getPath();
-			String name = properties.getName();
-			PropertyManager pManager = new PropertyManager(name, path);
-			Transliteration rules = pManager.getRules();
-			box.addItem(rules);
-			++n2;
+	public void setBoxContents(JComboBox box) {
+		try {
+			box.removeAllItems();
+			File[] allProperties = this.finder(SwingApp.dataFolder);
+			File[] arrfile = allProperties;
+			int n = arrfile.length;
+			int n2 = 0;
+			while (n2 < n) {
+				File properties = arrfile[n2];
+				String path = properties.getPath();
+				String name = properties.getName();
+				PropertyManager pManager;
+				pManager = new PropertyManager(name, path);
+				Transliteration rules = pManager.getRules();
+				box.addItem(rules);
+				++n2;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		SwingApp.transTableObj = box.getItemAt(0);
 	}

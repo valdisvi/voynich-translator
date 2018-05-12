@@ -59,11 +59,7 @@ public class SwingAddFrame extends JFrame {
 			}
 		});
 
-		try {
-			t.setBoxContents(comboBox);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		t.setBoxContents(comboBox);
 
 		JButton btnSave = new JButton("Save");
 		btnSave.addMouseListener(new MouseAdapter() {
