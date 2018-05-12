@@ -23,7 +23,11 @@ public class EditFrame extends JInternalFrame {
 	private static JFrame f;
 	private String fileName;
 	JTextArea textArea;
+	JScrollPane scr;
 
+	/**
+	 * This method is only for testing purposes
+	 */
 	public static void main(String[] args) {
 		f = new JFrame("Application");
 		f.setSize(600, 400);
@@ -34,6 +38,7 @@ public class EditFrame extends JInternalFrame {
 	}
 
 	public EditFrame(JFrame parentFrame, String fileName) {
+		System.out.println("EditFrame > fileName:" + fileName);
 		getContentPane().setPreferredSize(new Dimension(88, 488));
 		getContentPane().setMinimumSize(new Dimension(78, 57));
 		this.fileName = fileName;
@@ -41,14 +46,17 @@ public class EditFrame extends JInternalFrame {
 		bi.setNorthPane(null);
 		setBorder(null);
 		JPanel panel = new JPanel();
-		textArea = new JTextArea(30, 10);
-		JScrollPane scr = new JScrollPane(textArea);
+		textArea = new JTextArea();
+		scr = new JScrollPane(textArea);
 		scr.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.setFont(new Font("DejaVu Sans Mono", Font.PLAIN, 12));
 		textArea.setText(fileRead(fileName));
-		textArea.setCaretPosition(textArea.getDocument().getLength());
+		// set scroll to start
+		scr.getVerticalScrollBar().setValue(scr.getVerticalScrollBar().getMinimum());
+		// set cursor to start
+		textArea.setCaretPosition(0);
 		getContentPane().add(panel, BorderLayout.SOUTH);
 		getContentPane().add(scr, BorderLayout.CENTER);
 		pack();
@@ -63,10 +71,9 @@ public class EditFrame extends JInternalFrame {
 		panel.add(saveButton, BorderLayout.WEST);
 		setVisible(true);
 		parentFrame.getContentPane().add(this);
-		//revalidate();
 	}
 
-	private String fileRead(String file) {
+	String fileRead(String file) {
 		FileReader read;
 		Scanner scan;
 		StringBuilder storeAllString = new StringBuilder("");
@@ -81,6 +88,15 @@ public class EditFrame extends JInternalFrame {
 			e.printStackTrace();
 		}
 		return storeAllString.toString();
+	}
+
+	void updateFrame(String fileName) {
+		this.fileName = fileName;
+		textArea.setText(fileRead(this.fileName));
+		// set scroll to start
+		scr.getVerticalScrollBar().setValue(scr.getVerticalScrollBar().getMinimum());
+		// set cursor to start
+		textArea.setCaretPosition(0);
 	}
 
 	private void saveBtn() {

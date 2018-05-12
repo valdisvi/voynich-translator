@@ -78,7 +78,6 @@ public class SwingAddFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-
 			}
 		});
 

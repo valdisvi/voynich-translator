@@ -39,7 +39,7 @@ public class SwingApp {
 	String author;
 	public static Object transTableObj;
 	public static String dataFolder = "VoynichData";
-	JInternalFrame editFrame;
+	EditFrame editFrame;
 	JPanel tablePanel;
 	GroupLayout gl_tablePanel;
 	JButton btnAdd;
@@ -182,18 +182,10 @@ public class SwingApp {
 
 		transTables.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()).replace(", ", "\n"));
-				// checks for change in selected item that is not caused by
-				// reloading
-				// and refreshes table according to selection
+				// refresh table according to selection
 				if (transTables.getItemCount() != 0) {
 					currentTableName = transTables.getSelectedItem().toString();
-					System.err.println(currentTableName);
-					editFrame = new EditFrame(mainFrame, SwingApp.dataFolder + "/" + currentTableName);
-					// editFrame.revalidate();
-					// tablePanel.revalidate();
-					initialize();
-					System.err.println(currentTableName);
+					editFrame.updateFrame(SwingApp.dataFolder + "/" + currentTableName);
 				}
 			}
 		});
