@@ -17,7 +17,7 @@ import org.junit.Test;
 import application.AddController;
 import application.MainFrame;
 
-public class SwingAddCTest {
+public class AddControllerTest {
 	AddController t;
 
 	// SwingController tc;
