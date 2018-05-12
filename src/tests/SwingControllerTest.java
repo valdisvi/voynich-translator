@@ -19,16 +19,16 @@ import org.junit.Test;
 
 import application.AddController;
 import application.MainFrame;
-import application.SwingController;
+import application.MainController;
 import application.TransliterationProcess;
 
 public class SwingControllerTest {
-	SwingController te;
+	MainController te;
 	AddController t;
 
 	@Before
 	public void setUp() throws Exception {
-		te = new SwingController();
+		te = new MainController();
 		t = new AddController();
 	}
 

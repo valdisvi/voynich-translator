@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 
 public class AddController {
 
-	SwingController controller = new SwingController();
+	MainController controller = new MainController();
 	final String dataFolder = MainFrame.dataFolder;
 
 	// loads rules into Text

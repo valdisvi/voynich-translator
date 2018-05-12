@@ -33,7 +33,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
 public class MainFrame {
 
 	private JFrame mainFrame;
-	static SwingController controller;
+	static MainController controller;
 	static JComboBox transTables;
 	static String currentTableName = "BasicEVA_to_ASCIIsounds.properties";
 	String author;
@@ -64,7 +64,7 @@ public class MainFrame {
 	}
 
 	public MainFrame() throws IOException {
-		controller = new SwingController();
+		controller = new MainController();
 		controller.dataCreate();
 		initialize();
 	}
@@ -75,7 +75,7 @@ public class MainFrame {
 	 * @throws IOException
 	 */
 	private void initialize() {
-		controller = new SwingController();
+		controller = new MainController();
 		mainFrame = new JFrame();
 		mainFrame.setBounds(100, 100, 1024, 620);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -287,7 +287,7 @@ public class MainFrame {
 			public void mouseClicked(MouseEvent e) {
 				author = comboBoxW.getSelectedItem().toString();
 				controller.getResult(textW, textPaneW, author, group);
-				sourceLink.setText("Source: " + SwingController.authorURL.toString());
+				sourceLink.setText("Source: " + MainController.authorURL.toString());
 			}
 		});
 
@@ -302,7 +302,7 @@ public class MainFrame {
 					textW.setText("" + page);
 					author = comboBoxW.getSelectedItem().toString();
 					controller.getResult(textW, textPaneW, author, group);
-					sourceLink.setText("Source: " + SwingController.authorURL.toString());
+					sourceLink.setText("Source: " + MainController.authorURL.toString());
 				} else {
 					JOptionPane.showMessageDialog(null, "Currently at first page", "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -333,7 +333,7 @@ public class MainFrame {
 				textW.setText("" + page);
 				author = comboBoxW.getSelectedItem().toString();
 				controller.getResult(textW, textPaneW, author, group);
-				sourceLink.setText("Source: " + SwingController.authorURL.toString());
+				sourceLink.setText("Source: " + MainController.authorURL.toString());
 			}
 		});
 

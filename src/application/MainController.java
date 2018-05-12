@@ -28,7 +28,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class SwingController {
+public class MainController {
 
 	static String authorURL = null;
 

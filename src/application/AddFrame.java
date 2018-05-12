@@ -31,7 +31,7 @@ public class AddFrame extends JFrame {
 	// constructor for the frame that gets created on add.
 	public AddFrame() {
 		thisFrame = this;
-		SwingController t = new SwingController();
+		MainController t = new MainController();
 		AddController tc = new AddController();
 		setBounds(450, 130, 400, 574);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
