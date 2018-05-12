@@ -88,9 +88,7 @@ public class MainController {
 
 			File file = new File(MainFrame.dataFolder + "/" + name);
 			Path p = file.toPath();
-			if (name.equals("Currier.properties") || name.equals("BasicEVA_to_ASCIIsounds.properties")
-					|| name.equals("Bennett_to_FSG.properties") || name.equals("Bennett.properties")
-					|| name.equals("FSG.properties")) {
+			if (defaultTables.contains(name)) {
 				JOptionPane.showMessageDialog(null, "Cannot delete default table.", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
 				int check = (Integer) JOptionPane.showOptionDialog(null, "Do you want to delete table " + name + "?",
