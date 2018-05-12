@@ -180,7 +180,7 @@ public class SwingController {
 			box.addItem(rules);
 			++n2;
 		}
-		SwingApp.a = box.getItemAt(0);
+		SwingApp.transTableObj = box.getItemAt(0);
 	}
 
 	// gets selected value from a button group
