@@ -15,10 +15,10 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
-public class SwingHelpFrame extends JFrame {
+public class HelpFrame extends JFrame {
 	File file = new File("Welcome.html");
 
-	public SwingHelpFrame() throws Exception, IOException {
+	public HelpFrame() throws Exception, IOException {
 
 		DefaultMutableTreeNode topTop = new DefaultMutableTreeNode("User Guide Topics");
 

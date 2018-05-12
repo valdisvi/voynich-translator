@@ -91,7 +91,7 @@ public class SwingApp {
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					@SuppressWarnings("unused")
-					JFrame helpFrame = new SwingHelpFrame();
+					JFrame helpFrame = new HelpFrame();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
