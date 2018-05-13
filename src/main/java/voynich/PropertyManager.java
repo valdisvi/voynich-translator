@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class PropertyManager {
 	private String fileName;
@@ -57,23 +55,12 @@ public class PropertyManager {
 		this.rules = rules;
 	}
 
-	public void readFromFile() throws IOException {
-
+	public void readFromFile() {
 		Enumeration<Object> enuKeys = this.properties.keys();
-
 		while (enuKeys.hasMoreElements()) {
-
 			String key = (String) enuKeys.nextElement();
 			String value = this.properties.getProperty(key);
 			rules.addElement(key, value);
-		}
-
-		LinkedHashMap<String, String> list = rules.getList();
-
-		for (Map.Entry<String, String> entry : list.entrySet()) {
-
-			String key = entry.getKey();
-			String value = entry.getValue();
 		}
 	}
 }

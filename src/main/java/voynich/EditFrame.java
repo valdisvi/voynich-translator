@@ -20,7 +20,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class EditFrame extends JInternalFrame {
 	private static final long serialVersionUID = -5687409246419987970L;
-	private static JFrame f;
+
 	private String fileName;
 	JTextArea textArea;
 	JScrollPane scr;
@@ -29,6 +29,7 @@ public class EditFrame extends JInternalFrame {
 	 * This method is only for testing purposes
 	 */
 	public static void main(String[] args) {
+		JFrame f;
 		f = new JFrame("Application");
 		f.setSize(600, 400);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,7 +97,6 @@ public class EditFrame extends JInternalFrame {
 		File file = new File(fileName);
 		try (FileWriter out = new FileWriter(file);) {
 			out.write(textArea.getText());
-			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

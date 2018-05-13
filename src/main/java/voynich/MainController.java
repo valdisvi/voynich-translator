@@ -114,11 +114,7 @@ public class MainController {
 			int n2 = 0;
 			while (n2 < n) {
 				File properties = arrfile[n2];
-				String path = properties.getPath();
 				String name = properties.getName();
-				PropertyManager pManager;
-				pManager = new PropertyManager(name, path);
-				Transliteration rules = pManager.getRules();
 				box.addItem(name.replace(MainController.ext, ""));
 				++n2;
 			}
@@ -150,9 +146,6 @@ public class MainController {
 		double i = 0;
 		String f = "f0";
 		String webpage = "";
-		// String webpage = "http://www.voynich.nu/q01/f00" + t.getText() +
-		// version + "_tr.txt"; // source
-		// authorURL = webpage;
 		try {
 			page = Integer.valueOf(t.getText());
 		} catch (Exception ex) {
@@ -160,7 +153,6 @@ public class MainController {
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-
 		// setting the right quire
 		if (page < 9) {
 			quire = "q01";
@@ -175,14 +167,12 @@ public class MainController {
 				f = "f00";
 			}
 		}
-
 		// all of the other quires have varying amount of pages, hence the
 		// coding
 		// so blame the source website, not the poor coder that had to write
 		// this
 		if (page >= 57 && page <= 66) {
 			quire = "q08";
-			// f = "f00";
 		}
 		if ((page == 69)) {
 			quire = "q10";
@@ -261,7 +251,7 @@ public class MainController {
 		}
 	}
 
-	public void transliterate(String fileName, JTextPane in, JTextPane out) throws IOException, InterruptedException {
+	public void transliterate(String fileName, JTextPane in, JTextPane out) throws IOException {
 		String path = MainFrame.dataFolder + "/" + fileName;
 		TransliterationProcess tp = new TransliterationProcess(path, "Currier");
 		out.setText(tp.transliterate(in.getText()));

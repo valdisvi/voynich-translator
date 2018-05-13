@@ -2,7 +2,6 @@ package voynich;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,9 +17,7 @@ public class AddController {
 
 	// loads rules into Text
 	// TODO need to show from the top not bottom of rules.
-	public void selectTable(String name, JTextArea ef) throws FileNotFoundException, IOException {
-		Throwable throwable = null;
-		Object var2_3 = null;
+	public void selectTable(String name, JTextArea ef) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader(dataFolder + "/" + name));) {
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
@@ -30,7 +27,6 @@ public class AddController {
 				line = br.readLine();
 			}
 			ef.setText(sb.toString());
-			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

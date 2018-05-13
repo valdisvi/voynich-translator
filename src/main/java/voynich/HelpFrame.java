@@ -2,7 +2,6 @@ package voynich;
 
 import java.awt.BorderLayout;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.JEditorPane;
@@ -16,9 +15,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 public class HelpFrame extends JFrame {
+
+	private static final long serialVersionUID = 2910370656003700433L;
 	File file = new File("Welcome.html");
 
-	public HelpFrame() throws Exception, IOException {
+	public HelpFrame() throws Exception {
 
 		DefaultMutableTreeNode topTop = new DefaultMutableTreeNode("User Guide Topics");
 
@@ -58,7 +59,6 @@ public class HelpFrame extends JFrame {
 
 					}
 				}
-				;
 			}
 		});
 

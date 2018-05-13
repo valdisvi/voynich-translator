@@ -269,7 +269,7 @@ public class MainFrame {
 			}
 		});
 
-		JComboBox<String> comboBoxW = new JComboBox<String>();
+		JComboBox<String> comboBoxW = new JComboBox<>();
 		comboBoxW.setMinimumSize(new Dimension(32, 20));
 		StringBuilder boxHelp = new StringBuilder();
 		boxHelp.append(

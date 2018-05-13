@@ -24,7 +24,7 @@ public class TransliterationProcess {
 		return rules.getList();
 	}
 
-	public String transliterate(String inputText) throws IOException, InterruptedException {
+	public String transliterate(String inputText) {
 
 		for (Map.Entry<String, String> entry : rulesList.entrySet()) {
 
@@ -52,7 +52,7 @@ public class TransliterationProcess {
 
 	}
 
-	public boolean contains(String tmpString) throws IOException {
+	public boolean contains(String tmpString) {
 
 		for (Map.Entry<String, String> entry : rulesList.entrySet()) {
 			if (entry.getKey().startsWith(tmpString)) {
@@ -62,7 +62,7 @@ public class TransliterationProcess {
 		return false;
 	}
 
-	public boolean equals(String tmpString) throws IOException {
+	public boolean equals(String tmpString) {
 
 		for (Map.Entry<String, String> entry : rulesList.entrySet()) {
 			if (entry.getKey().equals(tmpString)) {

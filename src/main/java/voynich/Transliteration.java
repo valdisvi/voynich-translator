@@ -9,8 +9,7 @@ public class Transliteration {
 	private String name;
 
 	public Transliteration(String name) {
-
-		list = new LinkedHashMap<String, String>();
+		list = new LinkedHashMap<>();
 		this.name = name;
 	}
 
