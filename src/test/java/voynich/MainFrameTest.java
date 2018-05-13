@@ -1,4 +1,4 @@
-package tests;
+package voynich;
 
 import static org.junit.Assert.assertNotNull;
 
