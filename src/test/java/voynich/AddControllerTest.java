@@ -20,7 +20,10 @@ public class AddControllerTest {
 	// SwingController tc;
 	@Before
 	public void setUp() throws Exception {
+		MainController main = new MainController();
+		main.dataCreate();
 		t = new AddController();
+		
 		// tc= new SwingController();
 	}
 
