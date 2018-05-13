@@ -46,10 +46,10 @@ public class MainController {
 	private void makePropertyFile(String propFileName) {
 		InputStream stream = this.getClass().getResourceAsStream("/" + propFileName);
 		if (stream != null) {
+			new File(MainFrame.dataFolder).mkdirs();
 			try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 					FileWriter writer = new FileWriter(new File(MainFrame.dataFolder + "/" + propFileName), false);
 					PrintWriter printer = new PrintWriter(writer);) {
-				new File(MainFrame.dataFolder).mkdirs();
 				StringBuilder sb = new StringBuilder();
 				String line = reader.readLine();
 				while (line != null) {
