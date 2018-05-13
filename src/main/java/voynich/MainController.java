@@ -121,7 +121,6 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		MainFrame.transTableObj = box.getItemAt(0);
 	}
 
 	// gets selected value from a button group

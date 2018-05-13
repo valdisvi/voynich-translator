@@ -37,8 +37,7 @@ public class MainFrame {
 	static JComboBox transTables;
 	static String currentTableName = "BasicEVA_to_ASCIIsounds.properties";
 	String author;
-	public static Object transTableObj;
-	public static String dataFolder = "VoynichData";
+	public static final String dataFolder = "VoynichData";
 	EditFrame editFrame;
 	JPanel tablePanel;
 	GroupLayout gl_tablePanel;
@@ -64,8 +63,6 @@ public class MainFrame {
 	}
 
 	public MainFrame() throws IOException {
-		controller = new MainController();
-		controller.dataCreate();
 		initialize();
 	}
 
@@ -76,6 +73,7 @@ public class MainFrame {
 	 */
 	private void initialize() {
 		controller = new MainController();
+		controller.dataCreate();
 		mainFrame = new JFrame();
 		mainFrame.setResizable(false);
 		mainFrame.setBounds(100, 100, 1024, 620);
