@@ -17,10 +17,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.AddController;
-import application.MainFrame;
-import application.MainController;
-import application.TransliterationProcess;
+import voynich.AddController;
+import voynich.MainController;
+import voynich.MainFrame;
+import voynich.TransliterationProcess;
 
 public class MainControllerTest {
 	MainController te;

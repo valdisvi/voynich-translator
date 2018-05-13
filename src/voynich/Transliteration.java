@@ -1,4 +1,4 @@
-package application;
+package voynich;
 
 import java.util.LinkedHashMap;
 import java.util.List;

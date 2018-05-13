@@ -1,4 +1,4 @@
-package application;
+package voynich;
 
 import java.awt.EventQueue;
 import java.awt.Font;

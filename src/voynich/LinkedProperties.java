@@ -1,4 +1,4 @@
-package application;
+package voynich;
 
 import java.util.Collections;
 import java.util.Enumeration;

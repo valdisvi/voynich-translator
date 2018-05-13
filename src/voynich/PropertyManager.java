@@ -1,4 +1,4 @@
-package application;
+package voynich;
 
 import java.io.File;
 import java.io.FileInputStream;

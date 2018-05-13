@@ -1,4 +1,4 @@
-package application;
+package voynich;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;

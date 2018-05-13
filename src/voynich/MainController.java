@@ -1,4 +1,4 @@
-package application;
+package voynich;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -281,10 +281,10 @@ public class MainController {
 
 	public void setFont(JButton b, JTextPane text, JTable table) throws FontFormatException, IOException {
 		Font v = Font.createFont(Font.TRUETYPE_FONT,
-				getClass().getClassLoader().getResourceAsStream("application/voynich.ttf")).deriveFont(12f);
+				getClass().getClassLoader().getResourceAsStream("voynich/voynich.ttf")).deriveFont(12f);
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
-				getClass().getClassLoader().getResourceAsStream("application/voynich.ttf")));
+				getClass().getClassLoader().getResourceAsStream("voynich/voynich.ttf")));
 		if (text.getFont().toString().contains("Dialog")) { // to Voynich
 			text.setFont(v);
 			@SuppressWarnings("serial")

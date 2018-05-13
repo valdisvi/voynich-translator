@@ -14,8 +14,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.AddController;
-import application.MainFrame;
+import voynich.AddController;
+import voynich.MainFrame;
 
 public class AddControllerTest {
 	AddController t;
