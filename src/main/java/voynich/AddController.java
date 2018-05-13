@@ -18,12 +18,12 @@ public class AddController {
 	MainController controller = new MainController();
 
 	// loads rules into Text
-	public void selectTable(String name, JTextArea ef) {
+	void selectTable(String name, JTextArea ef) {
 		ef.setText(readFromFile(name));
 		ef.setCaretPosition(0);
 	}
 
-	public void addTable(String name, JTextArea rules) {
+	void addTable(String name, JTextArea rules) {
 		boolean checkFile = new File(MainFrame.dataFolder, name + MainController.ext).exists();
 		if (name.equals("")) {
 			JOptionPane.showMessageDialog(null, "Name cannot be empty." + "\nPlease fill out the name form.", "Error",
@@ -70,7 +70,7 @@ public class AddController {
 		return fileName;
 	}
 
-	public static void writeToFile(String name, JTextArea rules) {
+	static void writeToFile(String name, JTextArea rules) {
 		name = normalizeFileName(name);
 		try (FileWriter out = new FileWriter(name);) {
 			out.write(rules.getText());
