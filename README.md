@@ -8,10 +8,11 @@ The web source for getting transcribed pages is http://voynich.nu/
 ### Features
 
 - Text transliteration
-- Font change (Manuscript/Latin)
 - Custom transliteration tables
 - Load transcribed pages from a web source
   - Pick different transcription versions
+
+![Screenshot](https://github.com/valdisvi/voynich-translator/blob/master/src/main/resources/voynich-translator.png)
 
 ### General improvements
 
