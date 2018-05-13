@@ -87,8 +87,7 @@ public class AddController {
 			while (scan.hasNextLine())
 				storeAllString.append(scan.nextLine() + "\n");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Something went wrong.", "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return storeAllString.toString();
 	}

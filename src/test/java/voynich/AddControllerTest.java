@@ -34,7 +34,7 @@ public class AddControllerTest {
 
 	@Test
 	public void testSelectTable() throws Exception {
-		String testName = "testerEmpty";
+		String testName = "testerEmpty.properties";
 		File testFile = new File(MainFrame.dataFolder + "/" + testName);
 		JTextArea efer = new JTextArea();
 		t.selectTable(testName, efer);
