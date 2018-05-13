@@ -2,6 +2,7 @@ package voynich;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Transliteration {
 
@@ -17,15 +18,15 @@ public class Transliteration {
 		return name;
 	}
 
-	public void setList(LinkedHashMap<String, String> list) {
-		this.list = list;
+	public void setList(Map<String, String> list) {
+		this.list = new LinkedHashMap<String, String>(list);
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public LinkedHashMap<String, String> getList() {
+	public Map<String, String> getList() {
 		return list;
 	}
 

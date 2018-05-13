@@ -56,7 +56,7 @@ public class HelpFrame extends JFrame {
 						URL url = getClass().getResource(userFile.getName());
 						editorPane.setPage(url);
 					} catch (Exception e1) {
-
+						e1.printStackTrace();
 					}
 				}
 			}

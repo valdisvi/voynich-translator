@@ -14,11 +14,10 @@ public class TransliterationProcess {
 
 		this.transliterationFilePath = path;
 		this.transliterationFileName = fileName;
-		this.rulesList = this.getRules();
+		this.rulesList = (LinkedHashMap<String, String>) this.getRules();
 	}
 
-	public LinkedHashMap<String, String> getRules() throws IOException {
-
+	public Map<String, String> getRules() throws IOException {
 		PropertyManager pManager = new PropertyManager(transliterationFileName, transliterationFilePath);
 		Transliteration rules = pManager.getRules();
 		return rules.getList();
@@ -62,8 +61,8 @@ public class TransliterationProcess {
 		return false;
 	}
 
-	public boolean equals(String tmpString) {
-
+	@Override
+	public boolean equals(Object tmpString) {
 		for (Map.Entry<String, String> entry : rulesList.entrySet()) {
 			if (entry.getKey().equals(tmpString)) {
 				return true;
