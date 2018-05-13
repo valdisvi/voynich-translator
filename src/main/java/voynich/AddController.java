@@ -16,7 +16,6 @@ public class AddController {
 	final String dataFolder = MainFrame.dataFolder;
 
 	// loads rules into Text
-	// TODO need to show from the top not bottom of rules.
 	public void selectTable(String name, JTextArea ef) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader(dataFolder + "/" + name));) {
 			StringBuilder sb = new StringBuilder();
@@ -27,6 +26,7 @@ public class AddController {
 				line = br.readLine();
 			}
 			ef.setText(sb.toString());
+			ef.setCaretPosition(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
