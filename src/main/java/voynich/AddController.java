@@ -42,8 +42,7 @@ public class AddController {
 		if (name.equals("")) {
 			JOptionPane.showMessageDialog(null, "Name cannot be empty." + "\nPlease fill out the name form.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} else if (name.equals("Currier") || name.equals("BasicEVA_to_ASCIIsounds") || name.equals("Bennett_to_FSG")
-				|| name.equals("Bennett") || name.equals("FSG")) {
+		} else if (MainController.defaultTables.contains(name + ".properties")) {
 			JOptionPane.showMessageDialog(null, "Cannot overwrite default table." + "\nPlease choose a different name",
 					"Default name used", JOptionPane.ERROR_MESSAGE);
 		} else if (rules.getText().equals("")) {
