@@ -34,6 +34,7 @@ public class MainController {
 			"FSG.properties"//
 	));
 
+
 	public void dataCreate() {
 		// VoynichData - folder containing .properties files with
 		// transliteration tables
@@ -42,11 +43,12 @@ public class MainController {
 	}
 
 	private void makePropertyFile(String propFileName) {
-		try {
-			InputStream stream = this.getClass().getResourceAsStream("/" + propFileName);
-			if (stream != null) {
+		InputStream stream = this.getClass().getResourceAsStream("/" + propFileName);
+		if (stream != null) {
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+					FileWriter writer = new FileWriter(new File(MainFrame.dataFolder + "/" + propFileName), false);
+					PrintWriter printer = new PrintWriter(writer);) {
 				new File(MainFrame.dataFolder).mkdirs();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 				StringBuilder sb = new StringBuilder();
 				String line = reader.readLine();
 				while (line != null) {
@@ -54,14 +56,10 @@ public class MainController {
 					sb.append(System.lineSeparator());
 					line = reader.readLine();
 				}
-				File file = new File(MainFrame.dataFolder + "/" + propFileName);
-				FileWriter writer = new FileWriter(file, false);
-				PrintWriter printer = new PrintWriter(writer);
 				printer.append(sb.toString());
-				printer.close();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 

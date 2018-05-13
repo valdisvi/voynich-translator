@@ -21,8 +21,7 @@ public class AddController {
 	public void selectTable(String name, JTextArea ef) throws FileNotFoundException, IOException {
 		Throwable throwable = null;
 		Object var2_3 = null;
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(dataFolder + "/" + name));
+		try (BufferedReader br = new BufferedReader(new FileReader(dataFolder + "/" + name));) {
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
 			while (line != null) {
