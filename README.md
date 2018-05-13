@@ -1,4 +1,3 @@
-
 # Voynich Transliterator
 
 ### Overview
@@ -10,11 +9,11 @@ The web source for getting transcribed pages is http://voynich.nu/
 
 - Text transliteration
 - Font change (Manuscript/Latin)
-- Custom transliteration tables 
-- Load transcribed pages from a web source 
+- Custom transliteration tables
+- Load transcribed pages from a web source
   - Pick different transcription versions
 
-### General improvements 
+### General improvements
 
 - More intuitive, user-friendlier design
 - Possible to get transcriptions of most quires and pages of the manuscript
@@ -23,36 +22,27 @@ The web source for getting transcribed pages is http://voynich.nu/
 - User manual added to the application
 - No more JavaFX dependencies
 
-For improvements and fixes of an inherited JavaFX dependant project, please refer to [Source Investigation.md](https://github.com/beatrise/voynich-translator/blob/master/sourceInvestigation.md) file
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. ?See deployment for notes on how to deploy the project on a live system.?
 
-### Prerequisites
-To run inherited project class files with JavaFX dependencies you have to install Java FX libraries:
-```
-sudo apt-get install openjfx openjfx-source
-```
-For JavaFX development use [e(fx)clipse](https://www.eclipse.org/efxclipse/install.html) or other tool, which supports Java FX development environment.
-
 For simplifying Swing GUI development we recommend you use [WindowBuilder plugin](https://www.eclipse.org/windowbuilder/) or a similar tool.
 
-### Installing
-Import GitHub Project into Eclipse [how-to](https://github.com/collab-uniba/socialcde4eclipse/wiki/How-to-import-a-GitHub-project-into-Eclipse)
 
-or download archive file of the project and import it into Eclipse [how-to](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-importproject.htm)
 ## Deployment
 
-To deploy this application download the VoynichSwing.jar file to you computer. 
+To deploy this application download the voynich-translator.jar file to you computer.
 And execute like this:
 ```
-cd directoryOfJarFile
-java -jar VoynichSwing.jar
+git clone https://github.com/valdisvi/voynich-translator.git
+cd voynich-translator
+mvn mvn clean compile assembly:single
+cd target
+java -jar voynich-translator.jar
 ```
 Or to deploy directly with Java JDK Runtime Environment on Linux, change the .jar file permissions with terminal command:
 ```
-$chmod +x VoynichSwing.jar
+$chmod +x voynich-translator.jar
 ```
 
 For instructions on how to use this application please check project folder helpFiles, or run the application and click on button "Help"
@@ -61,20 +51,23 @@ For instructions on how to use this application please check project folder help
 ## Versioning
 
 There are no versions released.
-For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-See the list of [contributors](https://github.com/beatrise/voynich-translator/contributors) who participated in this project.
+See the list of [contributors](https://github.com/valdisvi/voynich-translator/contributors) who participated in this project.
 [Source code](https://github.com/valdisvi/voynich-translator)
-To see our notes on it go to [Source Investigation](https://github.com/beatrise/voynich-translator/blob/master/sourceInvestigation.md)
+To see our notes on it go to [Source Investigation](https://github.com/valdisvi/voynich-translator/blob/master/sourceInvestigation.md)
 
 ## Dependencies
 This application uses source text from [voynich.nu.](http://www.voynich.nu/q01/)
 
 ## Developed using
 [Eclipse IDE](https://www.eclipse.org/) (versions Neon and Oxygen)
-[WindowBuilder plugin](https://www.eclipse.org/windowbuilder/)  for Eclipse
-[JUnit 5](https://junit.org/junit5/) for tests
+[WindowBuilder plugin](https://www.eclipse.org/windowbuilder/) for Eclipse
+[JUnit4](https://junit.org/junit4/) for tests
 
 ## License
+Source code of this project is licenced under [LGPL 3.0 or later](https://spdx.org/licenses/LGPL-3.0-or-later.html) license.
+Documentation and other materials are licenced under [Creative Commons — Attribution 3.0](https://spdx.org/licenses/CC-BY-3.0.html) license.
+
