@@ -73,16 +73,10 @@ public class EditFrame extends JInternalFrame {
 	}
 
 	String fileRead(String file) {
-		FileReader read;
-		Scanner scan;
 		StringBuilder storeAllString = new StringBuilder("");
-		try {
-			read = new FileReader(file);
-			scan = new Scanner(read);
+		try (FileReader read = new FileReader(file); Scanner scan = new Scanner(read);) {
 			while (scan.hasNextLine())
 				storeAllString.append(scan.nextLine() + "\n");
-			scan.close();
-			read.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,11 +93,8 @@ public class EditFrame extends JInternalFrame {
 	}
 
 	private void saveBtn() {
-		File file = null;
-		FileWriter out = null;
-		try {
-			file = new File(fileName);
-			out = new FileWriter(file);
+		File file = new File(fileName);
+		try (FileWriter out = new FileWriter(file);) {
 			out.write(textArea.getText());
 			out.close();
 		} catch (Exception e) {
