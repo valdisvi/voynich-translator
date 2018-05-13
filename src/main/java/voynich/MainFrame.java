@@ -171,7 +171,7 @@ public class MainFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String itemName = transTables.getSelectedItem().toString();
-				controller.deleteTable(itemName + ".properties");
+				controller.deleteTable(itemName + MainController.ext);
 				controller.setBoxContents(transTables);
 				// check why this throw is necessary and the response we
 				// need for this.
@@ -193,7 +193,7 @@ public class MainFrame {
 				// refresh table according to selection
 				if (transTables.getItemCount() != 0) {
 					currentTableName = transTables.getSelectedItem().toString();
-					editFrame.updateFrame(MainFrame.dataFolder + "/" + currentTableName + ".properties");
+					editFrame.updateFrame(MainFrame.dataFolder + "/" + currentTableName + MainController.ext);
 				}
 			}
 		});
@@ -207,7 +207,7 @@ public class MainFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					txtpnText.setText("");
-					controller.transliterate(transTables.getSelectedItem().toString() + ".properties",
+					controller.transliterate(transTables.getSelectedItem().toString() + MainController.ext,
 							txtpnEnterTextHere, txtpnText);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -257,7 +257,7 @@ public class MainFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					txtpnText.setText("");
-					controller.transliterate(transTables.getSelectedItem().toString() + ".properties", textPaneW,
+					controller.transliterate(transTables.getSelectedItem().toString() + MainController.ext, textPaneW,
 							txtpnText);
 				} catch (IOException e1) {
 					e1.printStackTrace();

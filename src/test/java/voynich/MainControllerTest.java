@@ -66,11 +66,11 @@ public class MainControllerTest {
 	public void testDeleteTable() {
 		String testName = "testinABC";
 		// JTextArea ruleTest= new JTextArea();
-		File testFile = new File(MainFrame.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(MainFrame.dataFolder + "/" + testName + MainController.ext);
 		JTextArea ruleTest = new JTextArea("rules");
 		t.writeToFile(testName, ruleTest);
 
-		te.deleteTable(testName + ".properties");
+		te.deleteTable(testName + MainController.ext);
 		assertFalse("Table was not deleted", testFile.exists());
 		String wontName = "FSG.properties";
 		File wontFile = new File(MainFrame.dataFolder + "/" + wontName);

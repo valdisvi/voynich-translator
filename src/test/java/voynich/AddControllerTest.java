@@ -48,7 +48,7 @@ public class AddControllerTest {
 	@Test
 	public void testAddTable() {
 		String testName = "thisIsATest";
-		File testFile = new File(MainFrame.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(MainFrame.dataFolder + "/" + testName + MainController.ext);
 		JTextArea ruleTest = new JTextArea();
 		ruleTest.setText("test=tset");
 		t.addTable(testName, ruleTest);
@@ -61,7 +61,7 @@ public class AddControllerTest {
 	@Test
 	public void testWriteToFile() {
 		String testName = "thisIsATest";
-		File testFile = new File(MainFrame.dataFolder + "/" + testName + ".properties");
+		File testFile = new File(MainFrame.dataFolder + "/" + testName + MainController.ext);
 		JTextArea ruleTest = new JTextArea();
 		ruleTest.setText("test=tset");
 		t.writeToFile(testName, ruleTest);

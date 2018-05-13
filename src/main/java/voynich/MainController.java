@@ -34,6 +34,7 @@ public class MainController {
 			"FSG.properties"//
 	));
 
+	static final String ext = ".properties";
 
 	public void dataCreate() {
 		// VoynichData - folder containing .properties files with
@@ -68,7 +69,7 @@ public class MainController {
 
 		return dir.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String filename) {
-				return filename.endsWith(".properties");
+				return filename.endsWith(MainController.ext);
 			}
 		});
 	}
@@ -122,7 +123,7 @@ public class MainController {
 				PropertyManager pManager;
 				pManager = new PropertyManager(name, path);
 				Transliteration rules = pManager.getRules();
-				box.addItem(name.replace(".properties", ""));
+				box.addItem(name.replace(MainController.ext, ""));
 				++n2;
 			}
 		} catch (Exception e) {

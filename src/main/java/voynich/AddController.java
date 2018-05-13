@@ -37,11 +37,11 @@ public class AddController {
 	}
 
 	public void addTable(String name, JTextArea rules) {
-		boolean checkFile = new File(dataFolder, name + ".properties").exists();
+		boolean checkFile = new File(dataFolder, name + MainController.ext).exists();
 		if (name.equals("")) {
 			JOptionPane.showMessageDialog(null, "Name cannot be empty." + "\nPlease fill out the name form.", "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} else if (MainController.defaultTables.contains(name + ".properties")) {
+		} else if (MainController.defaultTables.contains(name + MainController.ext)) {
 			JOptionPane.showMessageDialog(null, "Cannot overwrite default table." + "\nPlease choose a different name",
 					"Default name used", JOptionPane.ERROR_MESSAGE);
 		} else if (rules.getText().equals("")) {
@@ -68,7 +68,7 @@ public class AddController {
 
 	public void writeToFile(String name, JTextArea rules) {
 
-		try (FileWriter writer = new FileWriter(new File(dataFolder + "/" + name + ".properties"), false)) {
+		try (FileWriter writer = new FileWriter(new File(dataFolder + "/" + name + MainController.ext), false)) {
 			PrintWriter printer = new PrintWriter(writer);
 			printer.append(rules.getText());
 			printer.close();
