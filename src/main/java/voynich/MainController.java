@@ -86,10 +86,6 @@ public class MainController {
 						"Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (check == JOptionPane.YES_OPTION) {
 					try {
-						// this is a java bug.
-						// manual call to a garbage collector necessary to
-						// delete file
-						System.gc();
 						Files.delete(p);
 						// check for successful/ unsuccessful file removal
 						JOptionPane.showMessageDialog(null, "Table succesfully removed", "Success!",
