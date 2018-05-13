@@ -1,9 +1,5 @@
 package voynich;
 
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -22,13 +18,10 @@ import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.table.DefaultTableCellRenderer;
 
 public class MainController {
 

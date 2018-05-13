@@ -17,11 +17,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import voynich.AddController;
-import voynich.MainController;
-import voynich.MainFrame;
-import voynich.TransliterationProcess;
-
 public class MainControllerTest {
 	MainController te;
 	AddController t;
