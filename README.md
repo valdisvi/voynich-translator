@@ -1,7 +1,7 @@
 # Voynich Transliterator
 
 ### Overview
-This project's source code is for a Voynich Manuscript transliteration application. It is used to simplify and automate the transliteration process by quickly getting the transcription of the page and applying different table transliterations to text generated from user input or an online source.
+This project's is for a Voynich Manuscript transliteration application. It is used to simplify and automate the transliteration process by quickly getting the transcription of the page and applying different table transliterations to text generated from user input or an online source.
 Users can create custom transliteration tables and apply their rules to the generated text, as well as use the provided default tables.
 The web source for getting transcribed pages is http://voynich.nu/
 
@@ -22,8 +22,8 @@ The web source for getting transcribed pages is http://voynich.nu/
 - [On Windows or Mac](https://www.java.com/en/download/help/version_manual.xml)
 - [On Ubuntu](https://www.howtogeek.com/191427/how-to-find-out-if-java-is-installed-in-ubuntu-and-how-to-install-it/)
 
-2. Download [voynich-translator.jar](https://github.com/valdisvi/voynich-translator/blob/master/bin/voynich-translator.jar?raw=true)
-3. Run application with command in the terminal:
+2. Download and save [voynich-translator.jar](https://github.com/valdisvi/voynich-translator/blob/master/bin/voynich-translator.jar?raw=true)
+3. Run application with command in the terminal from Downloads folder
 ```
 java -jar voynich-translator.jar
 ```
@@ -47,6 +47,7 @@ mvn clean compile eclipse:eclipse
 6. Build executable *.jar file:
 ```
 mvn assembly:single
+```
 7. Run newly built jar file:
 ```
 cd target
@@ -54,15 +55,16 @@ java -jar voynich-translator.jar
 ```
 
 ## Authors
-See the list of [contributors](https://github.com/valdisvi/voynich-translator/contributors) who participated in this project.
-[Source code](https://github.com/valdisvi/voynich-translator)
-To see our notes on it go to [Source Investigation](https://github.com/valdisvi/voynich-translator/blob/master/sourceInvestigation.md)
+See the list of [contributors](https://github.com/valdisvi/voynich-translator/contributors)
+who participated in [this project](https://github.com/valdisvi/voynich-translator).
 
 ## Dependencies
 Project is built with [Maven](https://en.wikipedia.org/wiki/Apache_Maven)
+
 Application uses source text from [voynich.nu.](http://www.voynich.nu/q01/)
 
 ## License
 Source code of this project is licenced under [LGPL 3.0 or later](https://spdx.org/licenses/LGPL-3.0-or-later.html) license.
+
 Documentation and other materials are licenced under [Creative Commons — Attribution 3.0](https://spdx.org/licenses/CC-BY-3.0.html) license.
 
