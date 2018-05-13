@@ -27,6 +27,8 @@ import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
+import java.awt.Insets;
+import java.awt.Dimension;
 
 public class MainFrame {
 
@@ -75,6 +77,7 @@ public class MainFrame {
 	private void initialize() {
 		controller = new MainController();
 		mainFrame = new JFrame();
+		mainFrame.setResizable(false);
 		mainFrame.setBounds(100, 100, 1024, 620);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setTitle("Voynich Translator");
@@ -96,29 +99,38 @@ public class MainFrame {
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(mainFrame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
-				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(translatedPanel, GroupLayout.PREFERRED_SIZE, 657,
-										GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(593).addComponent(btnHelp))
-								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE)))
-				.addGap(26)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-						.createSequentialGroup().addComponent(btnHelp).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(translatedPanel, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup().addGap(12).addComponent(tablePanel,
-								GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)))
-				.addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(translatedPanel, GroupLayout.PREFERRED_SIZE, 657, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tabbedPane, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE))
+							.addGap(26))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(btnHelp)
+							.addGap(43))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(3)
+							.addComponent(btnHelp)
+							.addGap(3)
+							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(translatedPanel, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(12)
+							.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		GroupLayout gl_translatedPanel = new GroupLayout(translatedPanel);
@@ -209,24 +221,24 @@ public class MainFrame {
 
 		JScrollPane scrollPane_2 = new JScrollPane();
 		GroupLayout gl_textPane1 = new GroupLayout(textPane1);
-		gl_textPane1
-				.setHorizontalGroup(gl_textPane1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_textPane1.createSequentialGroup().addContainerGap()
-								.addGroup(gl_textPane1.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_textPane1.createSequentialGroup()
-												.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 612,
-														Short.MAX_VALUE)
-												.addContainerGap())
-										// .addGroup(gl_textPane1.createSequentialGroup().addComponent(btnVoynich)
-										// .addPreferredGap(ComponentPlacement.RELATED,
-										// 375, Short.MAX_VALUE)
-										.addComponent(btnTrans).addGap(33))));
-		gl_textPane1.setVerticalGroup(gl_textPane1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_textPane1.createSequentialGroup().addContainerGap()
-						// .addGroup(gl_textPane1.createParallelGroup(Alignment.BASELINE).addComponent(btnVoynich)
-						.addComponent(btnTrans).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_textPane1.setHorizontalGroup(
+			gl_textPane1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_textPane1.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_textPane1.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+						.addComponent(btnTrans, Alignment.TRAILING))
+					.addContainerGap())
+		);
+		gl_textPane1.setVerticalGroup(
+			gl_textPane1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_textPane1.createSequentialGroup()
+					.addGap(11)
+					.addComponent(btnTrans)
+					.addGap(7)
+					.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 
 		scrollPane_2.setViewportView(txtpnEnterTextHere);
 		textPane1.setLayout(gl_textPane1);
@@ -235,9 +247,11 @@ public class MainFrame {
 		tabbedPane.addTab("Web", null, webPanel, null);
 		JScrollPane scrollPane = new JScrollPane();
 		JTextPane textPaneW = new JTextPane();
+		textPaneW.setMargin(new Insets(0, 3, 3, 3));
 		scrollPane.setViewportView(textPaneW);
 
 		JButton buttonTransW = new JButton("Transliterate");
+		buttonTransW.setMargin(new Insets(2, 14, 0, 14));
 		buttonTransW.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -256,6 +270,7 @@ public class MainFrame {
 		});
 
 		JComboBox<String> comboBoxW = new JComboBox<String>();
+		comboBoxW.setMinimumSize(new Dimension(32, 20));
 		StringBuilder boxHelp = new StringBuilder();
 		boxHelp.append(
 				"<html>Transliteration versions are marked by a <br>single capital letter. For more insight on transcription<br> versions please visit the source website.</html>");
@@ -280,6 +295,7 @@ public class MainFrame {
 		pickV.setSelected(true);
 
 		JButton btnGetTextW = new JButton("Get text");
+		btnGetTextW.setMargin(new Insets(2, 14, 0, 14));
 		btnGetTextW.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -308,6 +324,7 @@ public class MainFrame {
 		});
 
 		JButton btnDeleteW = new JButton("Delete");
+		btnDeleteW.setMargin(new Insets(2, 14, 0, 14));
 		btnDeleteW.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -338,87 +355,86 @@ public class MainFrame {
 		JLabel lblPageNr = new JLabel("Page nr.:");
 
 		JLabel lblNewLabel = new JLabel("Transcription:");
+		lblNewLabel.setPreferredSize(new Dimension(99, 10));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 11));
 
 		GroupLayout gl_webPanel = new GroupLayout(webPanel);
-		gl_webPanel
-				.setHorizontalGroup(
-						gl_webPanel.createParallelGroup(Alignment.TRAILING)
+		gl_webPanel.setHorizontalGroup(
+			gl_webPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_webPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_webPanel.createSequentialGroup()
+							.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
 								.addGroup(gl_webPanel.createSequentialGroup()
-										.addContainerGap().addGroup(gl_webPanel
-												.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_webPanel
-														.createSequentialGroup().addGroup(
-																gl_webPanel.createParallelGroup(Alignment.LEADING)
-																		.addComponent(scrollPane,
-																				GroupLayout.DEFAULT_SIZE, 632,
-																				Short.MAX_VALUE)
-																		.addGroup(gl_webPanel.createSequentialGroup()
-																				.addComponent(lblPageNr).addGap(2)
-																				.addComponent(btnPPage,
-																						GroupLayout.PREFERRED_SIZE, 24,
-																						GroupLayout.PREFERRED_SIZE)
-																				.addPreferredGap(
-																						ComponentPlacement.RELATED)
-																				.addComponent(textW,
-																						GroupLayout.PREFERRED_SIZE,
-																						35, GroupLayout.PREFERRED_SIZE)
-																				.addPreferredGap(
-																						ComponentPlacement.RELATED)
-																				.addComponent(btnNPage,
-																						GroupLayout.PREFERRED_SIZE, 25,
-																						GroupLayout.PREFERRED_SIZE)
-																				.addPreferredGap(
-																						ComponentPlacement.UNRELATED)
-																				.addComponent(pickR).addGap(12)
-																				.addComponent(pickV,
-																						GroupLayout.PREFERRED_SIZE, 34,
-																						GroupLayout.PREFERRED_SIZE)
-																				.addGap(18).addComponent(sourceLink,
-																						GroupLayout.PREFERRED_SIZE,
-																						331,
-																						GroupLayout.PREFERRED_SIZE)))
-														.addContainerGap())
-												.addGroup(gl_webPanel.createSequentialGroup().addGap(28)
-														.addComponent(lblNewLabel)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(comboBoxW, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.RELATED, 23,
-																Short.MAX_VALUE)
-														.addComponent(btnGetTextW).addGap(18).addComponent(btnDeleteW)
-														.addGap(18)
-														.addComponent(buttonTransW, GroupLayout.PREFERRED_SIZE, 127,
-																GroupLayout.PREFERRED_SIZE)
-														.addGap(20)))));
-		gl_webPanel.setVerticalGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_webPanel.createSequentialGroup().addGap(18)
-						.addGroup(
-								gl_webPanel.createParallelGroup(Alignment.BASELINE).addComponent(buttonTransW)
-										.addComponent(btnDeleteW).addComponent(btnGetTextW)
-										.addComponent(comboBoxW, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_webPanel.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_webPanel
-										.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
-												.addComponent(btnNPage, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-												.addComponent(btnPPage, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-												.addGroup(gl_webPanel.createSequentialGroup().addGap(16)
-														.addComponent(lblPageNr))))
-										.addGroup(gl_webPanel.createSequentialGroup().addGap(15).addComponent(textW,
-												GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(
-										gl_webPanel.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
-														.addComponent(sourceLink, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-														.addGroup(gl_webPanel.createParallelGroup(Alignment.BASELINE)
-																.addComponent(pickV).addComponent(pickR)))))
-						.addContainerGap()));
+									.addComponent(lblPageNr)
+									.addGap(2)
+									.addComponent(btnPPage, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textW, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNPage, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(pickR)
+									.addGap(12)
+									.addComponent(pickV, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(sourceLink, GroupLayout.PREFERRED_SIZE, 331, GroupLayout.PREFERRED_SIZE)))
+							.addContainerGap())
+						.addGroup(gl_webPanel.createSequentialGroup()
+							.addGap(28)
+							.addComponent(lblNewLabel)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(comboBoxW, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+							.addComponent(btnGetTextW)
+							.addGap(18)
+							.addComponent(btnDeleteW)
+							.addGap(18)
+							.addComponent(buttonTransW, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+							.addGap(19))))
+		);
+		gl_webPanel.setVerticalGroup(
+			gl_webPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_webPanel.createSequentialGroup()
+					.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_webPanel.createSequentialGroup()
+							.addGap(18)
+							.addComponent(lblNewLabel))
+						.addGroup(gl_webPanel.createSequentialGroup()
+							.addGap(14)
+							.addGroup(gl_webPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(buttonTransW)
+								.addComponent(btnDeleteW)
+								.addComponent(btnGetTextW)))
+						.addGroup(gl_webPanel.createSequentialGroup()
+							.addGap(14)
+							.addComponent(comboBoxW, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_webPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_webPanel.createSequentialGroup()
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
+									.addComponent(btnNPage, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+									.addComponent(btnPPage, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+									.addGroup(gl_webPanel.createSequentialGroup()
+										.addGap(16)
+										.addComponent(lblPageNr))))
+							.addGroup(gl_webPanel.createSequentialGroup()
+								.addGap(15)
+								.addComponent(textW, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_webPanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_webPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(sourceLink, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_webPanel.createParallelGroup(Alignment.BASELINE)
+									.addComponent(pickV)
+									.addComponent(pickR)))))
+					.addContainerGap())
+		);
 
 		editFrame = new EditFrame(mainFrame, MainFrame.dataFolder + "/" + currentTableName);
 		gl_tablePanel = new GroupLayout(tablePanel);
