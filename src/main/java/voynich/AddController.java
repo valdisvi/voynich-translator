@@ -1,39 +1,30 @@
 package voynich;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+/**
+ * @author valdis
+ *
+ */
 public class AddController {
 
 	MainController controller = new MainController();
-	final String dataFolder = MainFrame.dataFolder;
 
 	// loads rules into Text
-	public void selectTable(String name, JTextArea ef) throws IOException {
-		try (BufferedReader br = new BufferedReader(new FileReader(dataFolder + "/" + name));) {
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			ef.setText(sb.toString());
-			ef.setCaretPosition(0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void selectTable(String name, JTextArea ef) {
+		ef.setText(readFromFile(name));
+		ef.setCaretPosition(0);
 	}
 
 	public void addTable(String name, JTextArea rules) {
-		boolean checkFile = new File(dataFolder, name + MainController.ext).exists();
+		boolean checkFile = new File(MainFrame.dataFolder, name + MainController.ext).exists();
 		if (name.equals("")) {
 			JOptionPane.showMessageDialog(null, "Name cannot be empty." + "\nPlease fill out the name form.", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -62,19 +53,44 @@ public class AddController {
 
 	}
 
-	public void writeToFile(String name, JTextArea rules) {
+	/**
+	 * FIXME this method normalizes file names coming from different methods
+	 * (with or without data folder and .properties suffix
+	 * 
+	 * @param fileName
+	 *            passed file name
+	 * @return fixed file name
+	 */
+	private static String normalizeFileName(String fileName) {
 
-		try (FileWriter writer = new FileWriter(new File(dataFolder + "/" + name + MainController.ext), false)) {
-			PrintWriter printer = new PrintWriter(writer);
-			printer.append(rules.getText());
-			printer.close();
-			// need to solve the problem of updating the contents after creating
-			rules.setText(null);
+		if (fileName.indexOf(MainFrame.dataFolder) < 0)
+			fileName = MainFrame.dataFolder + "/" + fileName;
+		if (fileName.indexOf(MainController.ext) < 0)
+			fileName = fileName + MainController.ext;
+		return fileName;
+	}
 
+	public static void writeToFile(String name, JTextArea rules) {
+		name = normalizeFileName(name);
+		try (FileWriter out = new FileWriter(name);) {
+			out.write(rules.getText());
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Something went wrong.\n Please try again", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Something went wrong.", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
+	}
+
+	static String readFromFile(String fileName) {
+		fileName = normalizeFileName(fileName);
+		StringBuilder storeAllString = new StringBuilder("");
+		try (FileReader read = new FileReader(fileName); Scanner scan = new Scanner(read);) {
+			while (scan.hasNextLine())
+				storeAllString.append(scan.nextLine() + "\n");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Something went wrong.", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		return storeAllString.toString();
 	}
 
 }

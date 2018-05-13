@@ -5,10 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,7 +29,7 @@ public class EditFrame extends JInternalFrame {
 		f = new JFrame("Application");
 		f.setSize(600, 400);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		new EditFrame(f, "VoynichData/FSG.properties");
+		new EditFrame(f, "FSG.properties");
 		f.setLocationByPlatform(true);
 		f.setVisible(true);
 	}
@@ -41,7 +37,7 @@ public class EditFrame extends JInternalFrame {
 	public EditFrame(JFrame parentFrame, String fileName) {
 		getContentPane().setPreferredSize(new Dimension(88, 488));
 		getContentPane().setMinimumSize(new Dimension(78, 57));
-		this.fileName = fileName;
+		this.fileName = MainFrame.dataFolder + "/" + fileName;
 		BasicInternalFrameUI bi = (BasicInternalFrameUI) getUI();
 		bi.setNorthPane(null);
 		setBorder(null);
@@ -52,7 +48,7 @@ public class EditFrame extends JInternalFrame {
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.setFont(new Font("DejaVu Sans Mono", Font.PLAIN, 12));
-		textArea.setText(fileRead(fileName));
+		textArea.setText(AddController.readFromFile(this.fileName));
 		// set scroll to start
 		scr.getVerticalScrollBar().setValue(scr.getVerticalScrollBar().getMinimum());
 		// set cursor to start
@@ -73,20 +69,9 @@ public class EditFrame extends JInternalFrame {
 		parentFrame.getContentPane().add(this);
 	}
 
-	String fileRead(String file) {
-		StringBuilder storeAllString = new StringBuilder("");
-		try (FileReader read = new FileReader(file); Scanner scan = new Scanner(read);) {
-			while (scan.hasNextLine())
-				storeAllString.append(scan.nextLine() + "\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return storeAllString.toString();
-	}
-
 	void updateFrame(String fileName) {
 		this.fileName = fileName;
-		textArea.setText(fileRead(this.fileName));
+		textArea.setText(AddController.readFromFile(this.fileName));
 		// set scroll to start
 		scr.getVerticalScrollBar().setValue(scr.getVerticalScrollBar().getMinimum());
 		// set cursor to start
@@ -94,12 +79,7 @@ public class EditFrame extends JInternalFrame {
 	}
 
 	private void saveBtn() {
-		File file = new File(fileName);
-		try (FileWriter out = new FileWriter(file);) {
-			out.write(textArea.getText());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		AddController.writeToFile(fileName, textArea);
 	}
 
 }

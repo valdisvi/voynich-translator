@@ -68,7 +68,7 @@ public class MainControllerTest {
 		// JTextArea ruleTest= new JTextArea();
 		File testFile = new File(MainFrame.dataFolder + "/" + testName + MainController.ext);
 		JTextArea ruleTest = new JTextArea("rules");
-		t.writeToFile(testName, ruleTest);
+		AddController.writeToFile(testName, ruleTest);
 
 		te.deleteTable(testName + MainController.ext);
 		assertFalse("Table was not deleted", testFile.exists());

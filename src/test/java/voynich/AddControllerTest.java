@@ -64,7 +64,7 @@ public class AddControllerTest {
 		File testFile = new File(MainFrame.dataFolder + "/" + testName + MainController.ext);
 		JTextArea ruleTest = new JTextArea();
 		ruleTest.setText("test=tset");
-		t.writeToFile(testName, ruleTest);
+		AddController.writeToFile(testName, ruleTest);
 		assertTrue("New table file is not created", testFile.isFile());
 		testFile.delete();
 	}

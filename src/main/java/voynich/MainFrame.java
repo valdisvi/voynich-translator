@@ -417,7 +417,7 @@ public class MainFrame {
 												.addComponent(pickV).addComponent(pickR)))))
 				.addContainerGap()));
 
-		editFrame = new EditFrame(mainFrame, MainFrame.dataFolder + "/" + currentTableName);
+		editFrame = new EditFrame(mainFrame, currentTableName);
 		gl_tablePanel = new GroupLayout(tablePanel);
 		gl_tablePanel.setHorizontalGroup(gl_tablePanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_tablePanel.createSequentialGroup().addGap(75).addComponent(lblTable).addContainerGap(89,
